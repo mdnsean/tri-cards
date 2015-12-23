@@ -1,0 +1,19 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 20%;
+    right: 90%;
+    border: 4px outset blue;
+
+}
+
+.sidebar {
+    float: left;
+    clear: top;
+    border: 4px solid green;
+    bottom: 100%;
+}
+
+.main-content {
+    
+}

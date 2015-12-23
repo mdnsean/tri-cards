@@ -7,17 +7,17 @@
 
 <div class="sidebar">
   <div class="sidebar-item">
-    + New Deck
+    <button class="new-deck-button">New Deck</button>
   </div>
-  <div class="sidebar-item">
-    [Deck info]
-  </div>
-  <div class="sidebar-item">
-    Deck Options
-  </div>
+  <% Deck.all.each do |d| %>
+    <div class="sidebar-item">
+      <%= d.name %>
+      Deck Options
+    </div>
+  <% end %>
 </div>
 
-<div class="card-space">
+<div class="main-content">
   <div class="card">
     Card name
   </div>
