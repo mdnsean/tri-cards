@@ -1,19 +1,34 @@
+@import "variables";
+
+// Containers
+
+.container {
+    padding: 5px;
+    margin: 5px;
+    border: 4px outset blue;
+}
+
 .header {
     position: fixed;
     top: 0;
-    left: 20%;
-    right: 90%;
-    border: 4px outset blue;
+    left: 0;
+    right: 0;
+    height: $header-height;
 
 }
 
 .sidebar {
-    float: left;
-    clear: top;
-    border: 4px solid green;
-    bottom: 100%;
+    position: fixed;
+    top: $header-height + $gen-margin;
+    left: 0;
+    bottom: 0;
+    width: $sidebar-width;
 }
 
 .main-content {
-    
+    position: fixed;
+    top: $header-height + $gen-margin;
+    left: $sidebar-width + $gen-margin;
+    right: 0;
+    bottom: 0;
 }
