@@ -1,3 +1,4 @@
+<script type="text/javascript">Dash.start();</script>
 <div id="header" class="container">
   Welcome to Tricards
   <div>
@@ -7,7 +8,7 @@
 
 <div id="sidebar" class="container">
   <div class="sidebar-item">
-    <button class="new-deck-button">New Deck</button>
+    <button id="new-deck-button">New Deck</button>
   </div>
   <% Deck.all.each do |d| %>
     <div class="sidebar-item">

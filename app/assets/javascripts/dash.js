@@ -1,12 +1,7 @@
-var dash = (function() {
-
+var Dash = (function() {
     var attachNewDeckHandler = function() {
-        var el = getElementById('new-deck-button');
+        var el = document.getElementById("new-deck-button");
         el.addEventListener('click', createNewDeck, false);
-    };
-
-    var start = function() {
-        attachNewDeckHandler();
     };
 
     var createNewDeck = function() {
@@ -20,7 +15,7 @@ var dash = (function() {
             } else {
                 var resp = "Status code: " + JSON.parse(xhr.statusText);
             }
-        }
+        };
     };
 
     var displayNewDeck = function(deck) {
@@ -28,7 +23,11 @@ var dash = (function() {
         console.log(deck);
     };
 
+    var start = function() {
+        attachNewDeckHandler();
+    };
+
     return {
-        start: start;
+        start: start
     };
 })();
