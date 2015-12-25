@@ -5,9 +5,8 @@ var Dash = (function() {
     };
 
     var createNewDeck = function() {
-        var xhr = new XMLHttpRequest();
         // toggle new deck form modal
-        xhr.open('POST', '/decks', true);
+        var xhr = new XMLHttpRequest();
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var deck = JSON.parse(xhr.responseText);
@@ -16,6 +15,8 @@ var Dash = (function() {
                 var resp = "Status code: " + JSON.parse(xhr.statusText);
             }
         };
+        xhr.open('POST', '/decks', true);
+        xhr.send();
     };
 
     var displayNewDeck = function(deck) {
