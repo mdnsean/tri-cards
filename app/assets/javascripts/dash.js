@@ -11,13 +11,21 @@ var dash = (function() {
 
     var createNewDeck = function() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/decks/new', true);
-        // display new deck form
-        displayNewDeck();
+        // toggle new deck form modal
+        xhr.open('POST', '/decks', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var deck = JSON.parse(xhr.responseText);
+                displayNewDeck(deck);
+            } else {
+                var resp = "Status code: " + JSON.parse(xhr.statusText);
+            }
+        }
     };
 
-    var displayNewDeck = function() {
-        // add html of new deck
+    var displayNewDeck = function(deck) {
+        //  parse response, concatenate it
+        console.log(deck);
     };
 
     return {
