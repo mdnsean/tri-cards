@@ -1,4 +1,4 @@
-var Dash = (function() {
+var dashcode = (function() {
     var attachNewDeckHandler = function() {
         var el = document.getElementById("new-deck-button");
         el.addEventListener('click', createNewDeck, false);
@@ -32,3 +32,7 @@ var Dash = (function() {
         start: start
     };
 })();
+
+document.addEventListener('DOMContentLoaded', function() {
+    dashcode.start();
+});
