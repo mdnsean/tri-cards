@@ -6,6 +6,7 @@ var dashcode = (function() {
 
     var createNewDeck = function() {
         // toggle new deck form modal
+        
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
             if (xhr.status === 200) {

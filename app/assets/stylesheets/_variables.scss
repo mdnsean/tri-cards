@@ -2,3 +2,14 @@
 $header-height: 100px;
 $sidebar-width: 100px;
 $gen-margin: 30px;
+
+// Colors
+$white: #fff;
+$cold-gray: #999;
+
+@mixin gradient($top, $bottom) {
+    background: $top;
+    background: -moz-linear-gradient($top, $bottom);
+    background: -webkit-linear-gradient($top, $bottom);
+    background: -o-linear-gradient($top, $bottom);
+}
