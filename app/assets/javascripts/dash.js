@@ -1,28 +1,33 @@
 var dashcode = (function() {
     var attachNewDeckHandler = function() {
-        var el = document.getElementById("new-deck-button");
+        var el = document.getElementById("create-deck-button");
         el.addEventListener('click', createNewDeck, false);
     };
 
-    var createNewDeck = function() {
-        // toggle new deck form modal
-        
+    var createNewDeck = function(e) {
+        e.preventDefault();
+        var el = document.getElementById("deck-name");
+        var deckName = el.value;
+        console.log("deck name: " + deckName);
+        var data = {name: deckName};
+
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
             if (xhr.status === 200) {
-                var deck = JSON.parse(xhr.responseText);
+                var deck = xhr.responseText;
                 displayNewDeck(deck);
             } else {
-                var resp = "Status code: " + JSON.parse(xhr.statusText);
+                var resp = "Status code: " + xhr.statusText;
             }
         };
         xhr.open('POST', '/decks', true);
-        xhr.send();
+        // xhr.send(data);
+        xhr.send(JSON.stringify(data));
     };
 
     var displayNewDeck = function(deck) {
         //  parse response, concatenate it
-        console.log(deck);
+        console.log(deck.name);
     };
 
     var start = function() {
