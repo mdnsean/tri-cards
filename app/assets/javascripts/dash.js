@@ -1,4 +1,11 @@
 var dashcode = (function() {
+    var attachSelectDeckHandler = function() {
+        var elems = document.getElementsByClassName("select-deck");
+        for (el in elems) {
+            el.addEventListener('click', selectDeck, false);
+        }
+    }
+
     var attachNewDeckHandler = function() {
         var el = document.getElementById("create-deck-button");
         el.addEventListener('click', createNewDeck, false);
@@ -13,12 +20,12 @@ var dashcode = (function() {
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var deck = xhr.responseText;
-                displayNewDeck(deck);
+                displayNewDeck(JSON.parse(deck).name);
             } else {
                 var resp = "Status code: " + xhr.statusText;
             }
         };
-        
+
         xhr.open('POST', '/decks', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('Data-Type', 'json');
@@ -27,9 +34,12 @@ var dashcode = (function() {
         }));
     };
 
-    var displayNewDeck = function(deck) {
-        //  parse response, concatenate it
-        console.log(deck.name);
+    var displayNewDeck = function(name) {
+        var newEl = document.createElement("button");
+        var deckName = document.createTextNode(name);
+        newEl.appendChild(deckName);
+        newEl.className += " select-deck";
+        document.getElementById("all-decks").appendChild(newEl);
     };
 
     var start = function() {

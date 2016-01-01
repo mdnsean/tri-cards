@@ -6,28 +6,12 @@
 </div>
 
 <div id="sidebar" class="container">
-  <div class="sidebar-item">
-    <a href="#new-deck-modal">New Deck</a>
-    <div id="new-deck-modal" class="modal-dialog">
-      <div>
-        <a href="#close-modal" title="Close" class="close-modal">X</a>
-        <h2>New Deck</h2>
-        <%= form_tag("/decks", method: "post") do %>
-          <%= label_tag(:name, "Deck Name") %>
-          <%= text_field_tag :name, params[:name], id: "deck-name" %>
-          <%= submit_tag("Create", id:"create-deck-button") %>
-        <% end %>
-      </div>
-    </div>
-
-
+  <%= render 'new_deck_modal' %>
+  <div id="all-decks">
+    <% Deck.all.each do |d| %>
+      <button class="select-deck"><%= d.name %></button>
+    <% end %>
   </div>
-  <% Deck.all.each do |d| %>
-    <div class="sidebar-item">
-      <%= d.name %>
-      Deck Options
-    </div>
-  <% end %>
 </div>
 
 <div id="main-content" class="container">
