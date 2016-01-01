@@ -1,7 +1,7 @@
 <a href="#new-deck-modal">New Deck</a>
 <div id="new-deck-modal" class="modal-dialog">
   <div>
-    <a href="#close-modal" title="Close" class="close-modal">X</a>
+    <a href="#close-modal" id="close-nd-modal" class="close-modal">X</a>
     <h2>New Deck</h2>
     <%= form_tag("/decks", method: "post") do %>
       <%= label_tag(:name, "Deck Name") %>

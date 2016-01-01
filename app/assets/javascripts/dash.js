@@ -13,6 +13,7 @@ var dashcode = (function() {
 
     var createNewDeck = function(e) {
         e.preventDefault();
+        document.getElementById("close-nd-modal").click();
         var el = document.getElementById("deck-name");
         var deckName = el.value;
 
