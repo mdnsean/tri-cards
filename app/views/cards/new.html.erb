@@ -1,0 +1,20 @@
+<a href="#add-card-modal">Add card</a>
+<div id="add-card-modal" class="modal-dialog">
+  <div>
+    <a href="#close-modal" id="close-card-modal" class="close-modal">X</a>
+    <h2>New Deck</h2>
+    <%= form_tag("/cards", method: "post") do %>
+      
+      <%= label_tag(:name, "Card Name") %>
+      <%= text_field_tag :name, params[:name], id: "card-name" %>
+      
+      <%= label_tag(:left, @deck.left) %>
+      <%= text_area_tag :left, params[:left], id: "card-left" %>
+      
+      <%= label_tag(:right, @deck.right) %>
+      <%= text_area_tag :right, params[:right], id: "card-right" %>
+      
+      <%= submit_tag("Create", id:"create-card-button") %>
+    <% end %>
+  </div>
+</div>
