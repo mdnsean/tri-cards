@@ -7,11 +7,7 @@
 
 <div id="sidebar" class="container">
   <%= render 'new_deck_modal' %>
-  <div id="all-decks">
-    <% Deck.all.each do |d| %>
-      <button class="select-deck" name="<%= d.id %>"><%= d.name %></button>
-    <% end %>
-  </div>
+  <%= render 'deck_list' %>
 </div>
 
 <div id="main-content" class="container">

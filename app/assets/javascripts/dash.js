@@ -11,7 +11,7 @@ var dashcode = (function() {
 
     var selectDeck = function(id) {
         var cards = document.getElementById("cards");
-        
+
     }
 
     var attachNewDeckHandler = function() {
@@ -48,7 +48,7 @@ var dashcode = (function() {
         var deckName = document.createTextNode(name);
         newEl.appendChild(deckName);
         newEl.className += " select-deck";
-        document.getElementById("all-decks").appendChild(newEl);
+        document.getElementById("deck-list").appendChild(newEl);
     };
 
     var start = function() {
