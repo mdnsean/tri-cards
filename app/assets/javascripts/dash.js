@@ -1,9 +1,17 @@
 var dashcode = (function() {
+
     var attachSelectDeckHandler = function() {
         var elems = document.getElementsByClassName("select-deck");
         for (el in elems) {
-            el.addEventListener('click', selectDeck, false);
+            el.addEventListener('click', function() {
+                selectDeck(parseInt(el.name));
+            }, false);
         }
+    }
+
+    var selectDeck = function(id) {
+        var cards = document.getElementById("cards");
+        
     }
 
     var attachNewDeckHandler = function() {

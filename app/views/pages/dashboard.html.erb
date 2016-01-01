@@ -9,13 +9,12 @@
   <%= render 'new_deck_modal' %>
   <div id="all-decks">
     <% Deck.all.each do |d| %>
-      <button class="select-deck"><%= d.name %></button>
+      <button class="select-deck" name="<%= d.id %>"><%= d.name %></button>
     <% end %>
   </div>
 </div>
 
 <div id="main-content" class="container">
-  <div class="card">
-    Card name
+  <div id="cards">
   </div>
 </div>
