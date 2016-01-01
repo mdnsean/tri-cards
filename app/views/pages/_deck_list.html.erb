@@ -1,5 +1,6 @@
 <div id="deck-list">
   <% @decks.each do |d| %>
     <button class="select-deck" name="<%= d.id %>"><%= d.name %></button>
+    <a href="#add-card-modal">Add card</a>
   <% end %>
 </div>
