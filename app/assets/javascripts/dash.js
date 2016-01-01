@@ -8,8 +8,6 @@ var dashcode = (function() {
         e.preventDefault();
         var el = document.getElementById("deck-name");
         var deckName = el.value;
-        console.log("deck name: " + deckName);
-        var data = {name: deckName};
 
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -20,9 +18,13 @@ var dashcode = (function() {
                 var resp = "Status code: " + xhr.statusText;
             }
         };
+        
         xhr.open('POST', '/decks', true);
-        // xhr.send(data);
-        xhr.send(JSON.stringify(data));
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Data-Type', 'json');
+        xhr.send(JSON.stringify({
+            name: deckName
+        }));
     };
 
     var displayNewDeck = function(deck) {
