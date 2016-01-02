@@ -51,6 +51,13 @@
     pointer-events: none;
 }
 
+// Card Behaviors
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
 .modal-dialog:target {
     opacity:1;
     pointer-events: auto;
