@@ -5,20 +5,6 @@ var dashcode = (function() {
         el.addEventListener('click', createNewDeck, false);
     };
 
-    var attachSelectDeckHandler = function() {
-        var elems = document.getElementsByClassName("select-deck");
-        console.log(elems);
-        for (var i = 0; i < elems.length; i++) {
-        // for (var el in elems) {
-            console.log("out here: " + i);
-            var el = elems[i];
-            el.addEventListener('click', function() {
-                console.log("inside" + i);
-                selectDeck(parseInt(el.name));
-            }, false);
-        }
-    };
-
     var createNewDeck = function(e) {
         e.preventDefault();
         document.getElementById("close-nd-modal").click();
@@ -50,14 +36,18 @@ var dashcode = (function() {
         newEl.className += " select-deck";
         document.getElementById("deck-list").appendChild(newEl);
     };
+    
+    var attachSelectDeckHandler = function() {
+        var parent = document.getElementById("deck-list");
+        parent.addEventListener('click', selectDeck, false);
+    };
 
-    var selectDeck = function(id) {
-        // var cards = document.getElementById("cards");
-        console.log("selected button for deck id: " + id);
-        var addCardButton = document.getElementById("add-card-" + id);
-        console.log("+ butt classname: " + addCardButton.className);
-        addCardButton.classList.remove("hidden");
-        console.log("+ butt classname: " + addCardButton.className);
+    var selectDeck = function(e) {
+        if (e.target !== e.currentTarget) {
+            var butt = document.getElementById("add-card-button");
+            butt.textContent = "Selected deck: " + e.target.textContent;
+        }
+        e.stopPropagation();
     };
 
     var start = function() {
