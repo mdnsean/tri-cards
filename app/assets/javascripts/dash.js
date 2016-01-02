@@ -10,8 +10,10 @@ var dashcode = (function() {
         console.log(elems);
         for (var i = 0; i < elems.length; i++) {
         // for (var el in elems) {
+            console.log("out here: " + i);
             var el = elems[i];
             el.addEventListener('click', function() {
+                console.log("inside" + i);
                 selectDeck(parseInt(el.name));
             }, false);
         }
