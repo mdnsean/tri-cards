@@ -23,9 +23,9 @@ var dashcode = (function() {
         var left = document.getElementById("deck-left-input").value;
         var right = document.getElementById("deck-right-input").value;
         var data = {
-            name: deckName;
-            left: left;
-            right: right;
+            name: deckName,
+            left: left,
+            right: right
         };
 
         var onload = function(xhr) {
