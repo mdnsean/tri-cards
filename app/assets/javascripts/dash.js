@@ -1,5 +1,16 @@
 var dashcode = (function() {
 
+    var makeAjaxRequest = function(method, url, data, onload) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            onload(xhr);
+        };
+        xhr.open(method, url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Data-Type', 'json');
+        xhr.send(JSON.stringify(data));
+    };
+
     var attachNewDeckHandler = function() {
         var el = document.getElementById("create-deck-button");
         el.addEventListener('click', createNewDeck, false);
@@ -10,9 +21,8 @@ var dashcode = (function() {
         document.getElementById("close-nd-modal").click();
         var el = document.getElementById("deck-name");
         var deckName = el.value;
-
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function() {
+        var data = {name: deckName};
+        var onload = function(xhr) {
             if (xhr.status === 200) {
                 var deck = xhr.responseText;
                 displayNewDeck(JSON.parse(deck).name);
@@ -20,13 +30,7 @@ var dashcode = (function() {
                 var resp = "Status code: " + xhr.statusText;
             }
         };
-
-        xhr.open('POST', '/decks', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('Data-Type', 'json');
-        xhr.send(JSON.stringify({
-            name: deckName
-        }));
+        makeAjaxRequest('POST', '/decks', data, onload);
     };
 
     var displayNewDeck = function(name) {
@@ -44,14 +48,15 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
-            var deckName = e.target.textContent;
-            var butt = document.getElementById("add-card-button");
-            var nameLabel = document.getElementById("deck-name-label");            
-            var leftLabel = document.getElementById("deck-left-label");
-            var rightLabel = document.getElementById("deck-right-label");
+            // var deckName = e.target.textContent;
+            // var butt = document.getElementById("add-card-button");
+            // var nameLabel = document.getElementById("deck-name-label");            
+            // var leftLabel = document.getElementById("deck-left-label");
+            // var rightLabel = document.getElementById("deck-right-label");
             
-            butt.textContent = "Selected deck: " + deckName;
-            nameLabel.textContent = deckName + ": Add Card";
+            // butt.textContent = "Selected deck: " + deckName;
+            // nameLabel.textContent = deckName + ": Add Card";
+
         }
         e.stopPropagation();
     };
