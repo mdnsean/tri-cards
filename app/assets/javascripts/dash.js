@@ -44,8 +44,14 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
+            var deckName = e.target.textContent;
             var butt = document.getElementById("add-card-button");
-            butt.textContent = "Selected deck: " + e.target.textContent;
+            var nameLabel = document.getElementById("deck-name-label");            
+            var leftLabel = document.getElementById("deck-left-label");
+            var rightLabel = document.getElementById("deck-right-label");
+            
+            butt.textContent = "Selected deck: " + deckName;
+            nameLabel.textContent = deckName + ": Add Card";
         }
         e.stopPropagation();
     };
