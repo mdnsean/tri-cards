@@ -19,9 +19,15 @@ var dashcode = (function() {
     var createNewDeck = function(e) {
         e.preventDefault();
         document.getElementById("close-nd-modal").click();
-        var el = document.getElementById("deck-name");
-        var deckName = el.value;
-        var data = {name: deckName};
+        var deckName = document.getElementById("deck-name").value;
+        var left = document.getElementById("deck-left-input").value;
+        var right = document.getElementById("deck-right-input").value;
+        var data = {
+            name: deckName;
+            left: left;
+            right: right;
+        };
+
         var onload = function(xhr) {
             if (xhr.status === 200) {
                 var deck = xhr.responseText;
@@ -49,7 +55,7 @@ var dashcode = (function() {
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
             var deckName = e.target.textContent;
-            var deckId = parseInt(e.target.name);
+            var deckId = e.target.name;
             var nameLabel = document.getElementById("deck-name-label");            
             var leftLabel = document.getElementById("deck-left-label");
             var rightLabel = document.getElementById("deck-right-label");

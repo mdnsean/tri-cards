@@ -1,5 +1,7 @@
 <div id="deck-list">
   <% @decks.each do |d| %>
-    <button class="select-deck" name="<%= d.id %>"><%= d.name %></button>
+    <div id="<%= d.id %>" class="select-deck">
+      <button><%= d.name %></button>
+    </div>
   <% end %>
 </div>

@@ -1,0 +1,9 @@
+<div id="all-cards">
+  <% @decks.each do |deck| %>
+    <%= deck.name %>
+    <%= render 'add_card_modal', deck: deck %>
+    <% deck.cards.each do |card| %>
+      <%= card.name %>
+    <% end %>
+  <% end %>
+</div>
