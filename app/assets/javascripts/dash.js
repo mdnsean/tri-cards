@@ -48,18 +48,31 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
-            // var deckName = e.target.textContent;
-            // var butt = document.getElementById("add-card-button");
-            // var nameLabel = document.getElementById("deck-name-label");            
-            // var leftLabel = document.getElementById("deck-left-label");
-            // var rightLabel = document.getElementById("deck-right-label");
-            
-            // butt.textContent = "Selected deck: " + deckName;
-            // nameLabel.textContent = deckName + ": Add Card";
-
+            var deckName = e.target.textContent;
+            var deckId = parseInt(e.target.name);
+            var nameLabel = document.getElementById("deck-name-label");            
+            var leftLabel = document.getElementById("deck-left-label");
+            var rightLabel = document.getElementById("deck-right-label");
+            nameLabel.textContent = deckName + ": Add Card";
+            getCards(deckName);
         }
         e.stopPropagation();
     };
+
+    // var getCards = function(deckId) {
+    //     var data = {
+    //         id: deckId;
+    //     };
+    //     var onload = function() {
+    //         if (xhr.status === 200) {
+
+    //         } else {
+    //             flash[:info] = "Status code: " + xhr.statusText;
+    //         }
+    //     };
+    //     makeAjaxRequest('GET', '/decks/' + , data, onload);
+    // // var makeAjaxRequest = function(method, url, data, onload)
+    // };
 
     var start = function() {
         attachNewDeckHandler();

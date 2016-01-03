@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+    def new
+        @card = Card.new
     def create
         @card = Card.new(card_params)
         if @card.save
