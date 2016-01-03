@@ -1,4 +1,4 @@
-<!-- <a href="#add-card-modal">Add Card</a>
+<a href="#add-card-modal">Add Card</a>
 <div id="add-card-modal" class="modal-dialog">
   <div>
     <a href="#close-modal" id="close-card-modal" class="close-modal">X</a>
@@ -13,8 +13,8 @@
       
       <%= label_tag(:right, "[insert deck.right]", id: "deck-right-label") %>
       <%= text_area_tag :right, params[:right], id: "card-right-input" %>
-      
+      <%= hidden_field_tag(:deck_id, "[insert deck_id]") %>
       <%= submit_tag("Create", id:"create-card-button") %>
     <% end %>
   </div>
-</div> -->
+</div>

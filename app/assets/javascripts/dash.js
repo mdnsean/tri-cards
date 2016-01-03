@@ -53,8 +53,9 @@ var dashcode = (function() {
             var nameLabel = document.getElementById("deck-name-label");            
             var leftLabel = document.getElementById("deck-left-label");
             var rightLabel = document.getElementById("deck-right-label");
+            
             nameLabel.textContent = deckName + ": Add Card";
-            getCards(deckName);
+            
         }
         e.stopPropagation();
     };
