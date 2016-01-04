@@ -33,7 +33,7 @@ var dashcode = (function() {
                 var deck = xhr.responseText;
                 displayNewDeck(JSON.parse(deck).name);
             } else {
-                var resp = "Status code: " + xhr.statusText;
+                console.log("Status code: " + xhr.statusText);
             }
         };
         makeAjaxRequest('POST', '/decks', data, onload);
@@ -54,32 +54,34 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
-            // var deckName = e.target.textContent;
-            // var deckId = e.target.name;
-            // var nameLabel = document.getElementById("deck-name-label");            
-            // var leftLabel = document.getElementById("deck-left-label");
-            // var rightLabel = document.getElementById("deck-right-label");
-            
-            // nameLabel.textContent = deckName + ": Add Card";
-            
+            var deckId = e.target.name;
+            var data = {
+                id: deckId
+            };
+            var onload = function(xhr) {
+                if (xhr.status === 200) {
+                    var deck = JSON.parse(xhr.responseText);
+                    getCards(deck);
+                } else {
+                    console.log("Status code: " + xhr.statusText);
+                }
+            };
+            makeAjaxRequest('GET', '/decks/' + deckId, data, onload);
         }
         e.stopPropagation();
     };
 
-    // var getCards = function(deckId) {
-    //     var data = {
-    //         id: deckId;
-    //     };
-    //     var onload = function() {
-    //         if (xhr.status === 200) {
+    var getCards = function(deck) {
+            var nameLabel = document.getElementById("deck-name-label");            
+            var leftLabel = document.getElementById("deck-left-label");
+            var rightLabel = document.getElementById("deck-right-label");
+            var id = document.getElementById("deck-id-input");
 
-    //         } else {
-    //             flash[:info] = "Status code: " + xhr.statusText;
-    //         }
-    //     };
-    //     makeAjaxRequest('GET', '/decks/' + , data, onload);
-    // // var makeAjaxRequest = function(method, url, data, onload)
-    // };
+            nameLabel.textContent = deck.name + ": Add Card";
+            leftLabel.textContent = deck.left;
+            rightLabel.textContent = deck.right;
+            id.value = deck.id;
+    };
 
     var start = function() {
         attachNewDeckHandler();
