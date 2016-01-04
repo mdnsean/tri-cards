@@ -82,10 +82,39 @@ var dashcode = (function() {
             rightLabel.textContent = deck.right;
             id.value = deck.id;
     };
+    
+    var attachNewCardHandler = function() {
+        var el = document.getElementById("create-deck-button");
+        el.addEventListener('click', createNewDeck, false);
+    };
+
+    var createNewCard = function(e) {
+        e.preventDefault();
+        document.getElementById("close-nd-modal").click();
+        var deckName = document.getElementById("deck-name").value;
+        var left = document.getElementById("deck-left-input").value;
+        var right = document.getElementById("deck-right-input").value;
+        var data = {
+            name: deckName,
+            left: left,
+            right: right
+        };
+
+        var onload = function(xhr) {
+            if (xhr.status === 200) {
+                var deck = xhr.responseText;
+                displayNewDeck(JSON.parse(deck).name);
+            } else {
+                console.log("Status code: " + xhr.statusText);
+            }
+        };
+        makeAjaxRequest('POST', '/decks', data, onload);
+    };
 
     var start = function() {
         attachNewDeckHandler();
         attachSelectDeckHandler();
+        attachNewCardHandler();
     };
 
     return {

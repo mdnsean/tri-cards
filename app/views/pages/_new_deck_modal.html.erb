@@ -4,6 +4,7 @@
     <a href="#close-modal" id="close-nd-modal" class="close-modal">X</a>
     <h2>New Deck</h2>
     <%= form_tag("/decks", method: "post") do %>
+      
       <%= label_tag(:name, "Deck Name") %>
       <%= text_field_tag :name, params[:name], id: "deck-name" %><br>
       
@@ -12,6 +13,7 @@
       
       <%= label_tag(:right, "Right Side") %>
       <%= text_field_tag :right, params[:right], id: "deck-right-input" %>
+      
       <%= submit_tag("Create", id:"create-deck-button") %>
     <% end %>
   </div>
