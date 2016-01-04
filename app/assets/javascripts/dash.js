@@ -54,13 +54,13 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
-            var deckName = e.target.textContent;
-            var deckId = e.target.name;
-            var nameLabel = document.getElementById("deck-name-label");            
-            var leftLabel = document.getElementById("deck-left-label");
-            var rightLabel = document.getElementById("deck-right-label");
+            // var deckName = e.target.textContent;
+            // var deckId = e.target.name;
+            // var nameLabel = document.getElementById("deck-name-label");            
+            // var leftLabel = document.getElementById("deck-left-label");
+            // var rightLabel = document.getElementById("deck-right-label");
             
-            nameLabel.textContent = deckName + ": Add Card";
+            // nameLabel.textContent = deckName + ": Add Card";
             
         }
         e.stopPropagation();
