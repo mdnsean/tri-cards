@@ -31,7 +31,7 @@ var dashcode = (function() {
         var onload = function(xhr) {
             if (xhr.status === 200) {
                 var deck = xhr.responseText;
-                displayNewDeck(JSON.parse(deck).name);
+                displayNewDeck(JSON.parse(deck));
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
@@ -39,12 +39,19 @@ var dashcode = (function() {
         makeAjaxRequest('POST', '/decks', data, onload);
     };
 
-    var displayNewDeck = function(name) {
-        var newEl = document.createElement("button");
-        var deckName = document.createTextNode(name);
-        newEl.appendChild(deckName);
-        newEl.className += " select-deck";
-        document.getElementById("deck-list").appendChild(newEl);
+    var displayNewDeck = function(deck) {
+    //     <div class="select-deck">
+    //   <button name="<%= d.id %>"><%= d.name %></button>
+    // </div>
+        var deckHtml = "<div class='select-deck'><button name='";
+        deckHtml += deck.id + "'>" + deck.name + "</button></div>";
+        document.getElementById("deck-list").innerHTML += deckHtml;
+        
+        // var newEl = document.createElement("button");
+        // var deckName = document.createTextNode(name);
+        // newEl.appendChild(deckName);
+        // newEl.className += " select-deck";
+        // document.getElementById("deck-list").appendChild(newEl);
     };
     
     var attachSelectDeckHandler = function() {
@@ -104,13 +111,21 @@ var dashcode = (function() {
 
         var onload = function(xhr) {
             if (xhr.status === 200) {
-                var deck = xhr.responseText;
-                displayNewDeck(JSON.parse(deck).name);
+                var card = xhr.responseText;
+                displayNewCard(JSON.parse(card).name);
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
         };
-        makeAjaxRequest('POST', '/decks', data, onload);
+        makeAjaxRequest('POST', '/cards', data, onload);
+    };
+    
+    var displayNewCard = function(name) {
+        var newEl = document.createElement("button");
+        var deckName = document.createTextNode(name);
+        newEl.appendChild(deckName);
+        newEl.className += " select-deck";
+        document.getElementById("deck-list").appendChild(newEl);
     };
 
     var start = function() {
