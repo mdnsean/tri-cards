@@ -39,19 +39,16 @@ var dashcode = (function() {
         makeAjaxRequest('POST', '/decks', data, onload);
     };
 
-    var displayNewDeck = function(deck) {
-    //     <div class="select-deck">
-    //   <button name="<%= d.id %>"><%= d.name %></button>
-    // </div>
-        var deckHtml = "<div class='select-deck'><button name='";
-        deckHtml += deck.id + "'>" + deck.name + "</button></div>";
-        document.getElementById("deck-list").innerHTML += deckHtml;
+    var displayNewDeck = function(deck) {        
+        var newDiv = document.createElement("div");
+        var newButton = document.createElement("button");
+        var deckName = document.createTextNode(deck.name);
         
-        // var newEl = document.createElement("button");
-        // var deckName = document.createTextNode(name);
-        // newEl.appendChild(deckName);
-        // newEl.className += " select-deck";
-        // document.getElementById("deck-list").appendChild(newEl);
+        newDiv.className += " select-deck";
+        newButton.setAttribute("name", deck.id);
+        newButton.appendChild(deckName);
+        newDiv.appendChild(newButton);
+        document.getElementById("deck-list").appendChild(newDiv);
     };
     
     var attachSelectDeckHandler = function() {
