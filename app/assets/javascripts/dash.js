@@ -84,20 +84,22 @@ var dashcode = (function() {
     };
     
     var attachNewCardHandler = function() {
-        var el = document.getElementById("create-deck-button");
-        el.addEventListener('click', createNewDeck, false);
+        var el = document.getElementById("create-card-button");
+        el.addEventListener('click', createNewCard, false);
     };
 
     var createNewCard = function(e) {
         e.preventDefault();
-        document.getElementById("close-nd-modal").click();
-        var deckName = document.getElementById("deck-name").value;
-        var left = document.getElementById("deck-left-input").value;
-        var right = document.getElementById("deck-right-input").value;
+        document.getElementById("close-card-modal").click();
+        var cardName = document.getElementById("card-name").value;
+        var left = document.getElementById("card-left-input").value;
+        var right = document.getElementById("card-right-input").value;
+        var deckId = document.getElementById("deck-id-input").value;
         var data = {
-            name: deckName,
+            name: cardName,
             left: left,
-            right: right
+            right: right,
+            deck_id: deckId
         };
 
         var onload = function(xhr) {
