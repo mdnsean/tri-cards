@@ -102,17 +102,34 @@ var dashcode = (function() {
 </div>";
             var buildCard = document.getElementById("build-card");
             var cName = buildCard.childNodes[0];
-            var cLeft = buildCard.childNodes[1].childNodes[0];
-            var cRight = buildCard.childNodes[1].childNodes[1];
-            var cId = buildCard.childNodes[1].childNodes[2];
+            var cHidden = buildCard.childNodes[1];
+            var cLeft = cHidden.childNodes[0];
+            var cRight = cHidden.childNodes[1];
+            var cId = cHidden.childNodes[2];
 
             cName.textContent = card.name;
             cLeft.textContent = card.left;
             cRight.textContent = card.right;
             cId.textContent = card.id;
-            // hidden-later > hidden
-            // id = ""
+
+            attachSelectCardHandler(buildCard);
+            buildCard.setAttribute("id", "");
+            //cHidden.setAttribute("class", "hidden");
         }
+    };
+
+    var attachSelectCardHandler = function(card) {
+        card.addEventListener('click', selectCard, false);
+    };
+
+    var selectCard = function(e) {
+        // if (e.target !== e.currentTarget) {
+        //     var deckId = e.target.name;
+        //     var data = {
+        //         id: deckId
+        // };
+        // toggle class="hiddens"
+        // e.stopPropagation();
     };
     
     var attachNewCardHandler = function() {
