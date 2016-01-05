@@ -92,36 +92,27 @@ var dashcode = (function() {
         var cardList = document.getElementById("card-list");
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
-            var cardName = card.name;
-            var cardLeft = card.left;
-            var cardRight = card.right;
-            var cardId = card.id;
+            cardList.innerHTML += "<div id='build-card' class='select-card'>\
+<button class='card-name'></button>\
+<div class='hidden-later'>\
+<div class='card-left'></div>\
+<div class='card-right'></div>\
+<div class='card-id'></div>\
+</div>\
+</div>";
+            var buildCard = document.getElementById("build-card");
+            var cName = buildCard.childNodes[0];
+            var cLeft = buildCard.childNodes[1].childNodes[0];
+            var cRight = buildCard.childNodes[1].childNodes[1];
+            var cId = buildCard.childNodes[1].childNodes[2];
 
-            var outerDiv = document.createElement("div");
-            var cardButton = document.createElement("button");
-            var hiddens = document.createElement("div");
-            var leftDiv = document.createElement("div");
-            var rightDiv = document.createElement("div");
-
-            var leftText = document.createTextNode(cardLeft);
-            var rightText = document.createTextNode(cardRight);
-            leftDiv.appendChild(leftText);
-            rightDiv.appendChild(rightText);            
-            hiddens.appendChild(leftDiv);
-            hiddens.appendChild(rightDiv);
-
-
-            newDiv.className += " select-card";
+            cName.textContent = card.name;
+            cLeft.textContent = card.left;
+            cRight.textContent = card.right;
+            cId.textContent = card.id;
+            // hidden-later > hidden
+            // id = ""
         }
-        //     <div class="select-card">
-        //       <button name="<%= c.id %>"><%= c.name %></button>
-        //       <div class="hidden">
-        //         <div class="card-left"><%= c.left %></div>
-        //         <div class="card-right"><%= c.right %></div>
-        //       </div>
-        //     </div>
-        //   <% end %>
-        // </div>
     };
     
     var attachNewCardHandler = function() {
