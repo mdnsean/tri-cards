@@ -13,6 +13,7 @@ class DecksController < ApplicationController
         @cards = @deck.cards
         render json: {deck: @deck, cards: @cards}
     end
+    
     private
         def deck_params
             params.require(:deck).permit(:name, :left, :right)

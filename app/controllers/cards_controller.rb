@@ -9,7 +9,7 @@ class CardsController < ApplicationController
     end
 
     private
-        def deck_params
-            params.require(:card).permit(:name, :left, :right)
+        def card_params
+            params.require(:card).permit(:name, :left, :right, :deck_id)
         end
 end

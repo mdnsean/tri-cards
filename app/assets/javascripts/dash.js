@@ -65,8 +65,8 @@ var dashcode = (function() {
             var onload = function(xhr) {
                 if (xhr.status === 200) {
                     var resp = (JSON.parse(xhr.responseText));
-                    getAddCard(resp.deck);
-                    getCards(resp.deck, resp.cards);
+                    getAddCardForm(resp.deck);
+                    showCards(resp.deck, resp.cards);
                 } else {
                     console.log("Status code: " + xhr.statusText);
                 }
@@ -76,7 +76,7 @@ var dashcode = (function() {
         e.stopPropagation();
     };
 
-    var getAddCard = function(deck) {
+    var getAddCardForm = function(deck) {
             var nameLabel = document.getElementById("deck-name-label");            
             var leftLabel = document.getElementById("deck-left-label");
             var rightLabel = document.getElementById("deck-right-label");
@@ -88,10 +88,10 @@ var dashcode = (function() {
             id.value = deck.id;
     };
 
-    var getCards = function(deck, cards) {
+    var showCards = function(deck, cards) {
         var cardList = document.getElementById("card-list");
-        for (var i = 0; i < deck.cards.length; i++) {
-            var card = deck.cards[i];
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
             var cardName = card.name;
             var cardLeft = card.left;
             var cardRight = card.right;
