@@ -10,7 +10,8 @@ class DecksController < ApplicationController
 
     def show
         @deck = Deck.find(params[:id])
-        render json: @deck
+        @cards = @deck.cards
+        render json: {deck: @deck, cards: @cards}
     end
     private
         def deck_params

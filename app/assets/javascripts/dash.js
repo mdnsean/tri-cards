@@ -64,8 +64,9 @@ var dashcode = (function() {
             };
             var onload = function(xhr) {
                 if (xhr.status === 200) {
-                    var deck = JSON.parse(xhr.responseText);
-                    getCards(deck);
+                    var resp = (JSON.parse(xhr.responseText));
+                    getAddCard(resp.deck);
+                    getCards(resp.deck, resp.cards);
                 } else {
                     console.log("Status code: " + xhr.statusText);
                 }
@@ -75,7 +76,7 @@ var dashcode = (function() {
         e.stopPropagation();
     };
 
-    var getCards = function(deck) {
+    var getAddCard = function(deck) {
             var nameLabel = document.getElementById("deck-name-label");            
             var leftLabel = document.getElementById("deck-left-label");
             var rightLabel = document.getElementById("deck-right-label");
@@ -85,6 +86,42 @@ var dashcode = (function() {
             leftLabel.textContent = deck.left;
             rightLabel.textContent = deck.right;
             id.value = deck.id;
+    };
+
+    var getCards = function(deck, cards) {
+        var cardList = document.getElementById("card-list");
+        for (var i = 0; i < deck.cards.length; i++) {
+            var card = deck.cards[i];
+            var cardName = card.name;
+            var cardLeft = card.left;
+            var cardRight = card.right;
+            var cardId = card.id;
+
+            var outerDiv = document.createElement("div");
+            var cardButton = document.createElement("button");
+            var hiddens = document.createElement("div");
+            var leftDiv = document.createElement("div");
+            var rightDiv = document.createElement("div");
+
+            var leftText = document.createTextNode(cardLeft);
+            var rightText = document.createTextNode(cardRight);
+            leftDiv.appendChild(leftText);
+            rightDiv.appendChild(rightText);            
+            hiddens.appendChild(leftDiv);
+            hiddens.appendChild(rightDiv);
+
+
+            newDiv.className += " select-card";
+        }
+        //     <div class="select-card">
+        //       <button name="<%= c.id %>"><%= c.name %></button>
+        //       <div class="hidden">
+        //         <div class="card-left"><%= c.left %></div>
+        //         <div class="card-right"><%= c.right %></div>
+        //       </div>
+        //     </div>
+        //   <% end %>
+        // </div>
     };
     
     var attachNewCardHandler = function() {
@@ -109,7 +146,7 @@ var dashcode = (function() {
         var onload = function(xhr) {
             if (xhr.status === 200) {
                 var card = xhr.responseText;
-                displayNewCard(JSON.parse(card).name);
+                displayNewCard(JSON.parse(card));
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
@@ -117,12 +154,16 @@ var dashcode = (function() {
         makeAjaxRequest('POST', '/cards', data, onload);
     };
     
-    var displayNewCard = function(name) {
-        var newEl = document.createElement("button");
-        var deckName = document.createTextNode(name);
-        newEl.appendChild(deckName);
-        newEl.className += " select-deck";
-        document.getElementById("deck-list").appendChild(newEl);
+    var displayNewCard = function(card) {        
+        // var newDiv = document.createElement("div");
+        // var newButton = document.createElement("button");
+        // var cardName = document.createTextNode(card.name)
+        
+        // newDiv.className += " select-deck";
+        // newButton.setAttribute("name", deck.id);
+        // newButton.appendChild(deckName);
+        // newDiv.appendChild(newButton);
+        // document.getElementById("deck-list").appendChild(newDiv);
     };
 
     var start = function() {
