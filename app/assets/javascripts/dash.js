@@ -58,6 +58,10 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
+            var curDeck = document.getElementById("current-deck");
+            if (curDeck.textContent === e.target.textContent) {
+                return; // do nothing if this deck already selected
+            }
             var deckId = e.target.name;
             var data = {
                 id: deckId
@@ -89,7 +93,10 @@ var dashcode = (function() {
     };
 
     var showCards = function(deck, cards) {
+        var curDeck = document.getElementById("current-deck");
+        curDeck.textContent = deck.name;
         var cardList = document.getElementById("card-list");
+        cardList.innerHTML = "";
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             cardList.innerHTML += "<div id='build-card' class='select-card'>\
