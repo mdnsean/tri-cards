@@ -112,7 +112,7 @@ var dashcode = (function() {
 
             attachSelectCardHandler(buildCard);
             buildCard.setAttribute("id", "");
-            //cHidden.setAttribute("class", "hidden");
+            cHidden.setAttribute("class", "hidden");
         }
     };
 
@@ -121,13 +121,11 @@ var dashcode = (function() {
     };
 
     var selectCard = function(e) {
-        // if (e.target !== e.currentTarget) {
-        //     var deckId = e.target.name;
-        //     var data = {
-        //         id: deckId
-        // };
-        // toggle class="hiddens"
-        // e.stopPropagation();
+        if (e.target !== e.currentTarget) {
+            var hiddens = e.currentTarget.childNodes[1];
+            hiddens.classList.toggle("hidden");
+        }
+        e.stopPropagation();
     };
     
     var attachNewCardHandler = function() {
