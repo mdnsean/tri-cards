@@ -117,10 +117,10 @@ var dashcode = (function() {
             cLeft.textContent = card.left;
             cRight.textContent = card.right;
 
-            attachSelectCardHandler(buildCard);
             buildCard.setAttribute("id", "");
             cHidden.setAttribute("class", "hidden");
         }
+        attachSelectCardHandler(cardList);
     };
 
     var attachSelectCardHandler = function(card) {
@@ -129,7 +129,7 @@ var dashcode = (function() {
 
     var selectCard = function(e) {
         if (e.target !== e.currentTarget) {
-            var hiddens = e.currentTarget.childNodes[1];
+            var hiddens = e.target.nextSibling;
             hiddens.classList.toggle("hidden");
         }
         e.stopPropagation();
