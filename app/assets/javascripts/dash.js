@@ -97,7 +97,6 @@ var dashcode = (function() {
 <div class='hidden-later'>\
 <div class='card-left'></div>\
 <div class='card-right'></div>\
-<div class='card-id'></div>\
 </div>\
 </div>";
             var buildCard = document.getElementById("build-card");
@@ -105,12 +104,11 @@ var dashcode = (function() {
             var cHidden = buildCard.childNodes[1];
             var cLeft = cHidden.childNodes[0];
             var cRight = cHidden.childNodes[1];
-            var cId = cHidden.childNodes[2];
 
+            buildCard.setAttribute("name", card.id);
             cName.textContent = card.name;
             cLeft.textContent = card.left;
             cRight.textContent = card.right;
-            cId.textContent = card.id;
 
             attachSelectCardHandler(buildCard);
             buildCard.setAttribute("id", "");
