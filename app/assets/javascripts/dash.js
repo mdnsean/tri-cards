@@ -59,8 +59,8 @@ var dashcode = (function() {
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
             var sidebar = document.getElementById("sidebar");
-            sidebar.classList.add("hidden");
             var curDeck = document.getElementById("current-deck");
+            sidebar.classList.add("hidden");
             if (curDeck.textContent === e.target.textContent) {
                 return; // do nothing if this deck already selected
             }
@@ -168,18 +168,6 @@ var dashcode = (function() {
             }
         };
         makeAjaxRequest('POST', '/cards', data, onload);
-    };
-    
-    var displayNewCard = function(card) {        
-        // var newDiv = document.createElement("div");
-        // var newButton = document.createElement("button");
-        // var cardName = document.createTextNode(card.name)
-        
-        // newDiv.className += " select-deck";
-        // newButton.setAttribute("name", deck.id);
-        // newButton.appendChild(deckName);
-        // newDiv.appendChild(newButton);
-        // document.getElementById("deck-list").appendChild(newDiv);
     };
 
     var attachSidebarTriggers = function() {

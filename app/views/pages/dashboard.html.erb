@@ -2,6 +2,7 @@
   Welcome to Tricards
   <div>
     <button id="sidebar-trigger">Select a Deck</button>
+    <%= render 'add_card_modal' %>
   </div>
 </div>
 
@@ -13,22 +14,8 @@
 
 <div id="main-content" class="container">
   <div id="all-cards">
-    <div id="current-deck"></div>
-    <%= render 'add_card_modal' %>
-    <%= render 'card_table' %>
+    <%= render 'card_list' %>
   </div>
 </div>
 
-<div id="squares-container">
-  <% for i in 0..9 do %>
-    <div class="square">
-      <div class="card-cell">
-        <div class="table">
-          <div class="table-cell">
-            CONTENT
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render 'card_squares' %>
