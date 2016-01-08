@@ -177,10 +177,24 @@ var dashcode = (function() {
         // document.getElementById("deck-list").appendChild(newDiv);
     };
 
+    var attachSidebarTrigger = function() {
+        console.log("sidebar trigger added");
+        var el = document.getElementById("sidebar-trigger");
+        console.log(el.outerHTML);
+        el.addEventListener('click', sidebarToggle, false);
+    };
+
+    var sidebarToggle = function() {
+        var el = document.getElementById("sidebar");
+        el.classList.toggle("sidebar-on");
+        // el.classList.toggle("sidebar-off");
+    }
+
     var start = function() {
         attachNewDeckHandler();
         attachSelectDeckHandler();
         attachNewCardHandler();
+        attachSidebarTrigger();
     };
 
     return {

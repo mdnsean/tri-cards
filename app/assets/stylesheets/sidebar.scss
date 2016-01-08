@@ -2,7 +2,7 @@
 
 @keyframes sidebar-in {
     0% {opacity: 0;}
-    100% {opacity: .75;}   
+    100% {opacity: 0.8;}   
 }
 
 #sidebar {
@@ -13,9 +13,15 @@
     width: $sidebar-width;
 
     // new
-    opacity: 0;
     z-index: 4;
-    overflow: auto;
-    animation: sidebar-in 200ms linear 0 1 **direction;
+}
+
+.sidebar-off {
+    animation: sidebar-in 1s linear .01s 1 reverse;
+    animation-fill-mode: forwards;    
+}
+
+.sidebar-on {
+    animation: sidebar-in 1s linear .01s 1 normal;
     animation-fill-mode: forwards;
 }

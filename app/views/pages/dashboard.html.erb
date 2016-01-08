@@ -1,7 +1,7 @@
 <div id="header" class="container">
   Welcome to Tricards
   <div>
-    Select a Deck
+    <button id="sidebar-trigger">Select a Deck</button>
   </div>
 </div>
 
@@ -10,14 +10,14 @@
   <%= render 'deck_list' %>
 </div>
 
-<!-- 
+
 <div id="main-content" class="container">
   <div id="all-cards">
     <div id="current-deck"></div>
     <%= render 'add_card_modal' %>
     <%= render 'card_table' %>
   </div>
-</div> -->
+</div>
 
 <div id="squares-container">
   <% for i in 0..9 do %>
