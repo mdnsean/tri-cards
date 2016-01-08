@@ -1,15 +1,15 @@
-<!-- <div id="header" class="container">
+<div id="header" class="container">
   Welcome to Tricards
   <div>
     Select a Deck
   </div>
 </div>
-
+<!-- 
 <div id="sidebar" class="container">
   <%= render 'new_deck_modal' %>
   <%= render 'deck_list' %>
-</div>
-
+</div> -->
+<!-- 
 <div id="main-content" class="container">
   <div id="all-cards">
     <div id="current-deck"></div>
@@ -17,14 +17,17 @@
     <%= render 'card_table' %>
   </div>
 </div> -->
-<% for i in 0..8 do %>
-  <div class="square">
-    <div class="card-cell">
-      <div class="table">
-        <div class="table-cell">
-          CONTENT
+
+<div id="squares-container">
+  <% for i in 0..9 do %>
+    <div class="square">
+      <div class="card-cell">
+        <div class="table">
+          <div class="table-cell">
+            CONTENT
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

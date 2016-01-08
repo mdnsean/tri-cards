@@ -6,6 +6,8 @@ $gen-margin: 30px;
 // Colors
 $white: #fff;
 $cold-gray: #999;
+$dark-gray: #606061;
+$baby-blue: 00d9ff;
 
 @mixin gradient($top, $bottom) {
     background: $top;
@@ -13,3 +15,7 @@ $cold-gray: #999;
     background: -webkit-linear-gradient($top, $bottom);
     background: -o-linear-gradient($top, $bottom);
 }
+
+// Card Squares
+$sq-wd: 30%;
+$sq-ht: 30%;

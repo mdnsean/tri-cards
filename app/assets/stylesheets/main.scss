@@ -6,6 +6,7 @@
     padding: 5px;
     margin: 5px;
     border: 4px outset blue;
+    background-color: lightblue;
 }
 
 #header {
@@ -14,7 +15,7 @@
     left: 0;
     right: 0;
     height: $header-height;
-
+    z-index: 2;
 }
 
 #sidebar {
@@ -66,8 +67,8 @@
 }
 
 .close-modal {
-    background: #606061;
-    color: #FFFFFF;
+    background: $dark-gray;
+    color: $white;
     line-height: 25px;
     position: absolute;
     right: -12px;
@@ -84,7 +85,7 @@
     box-shadow: 1px 1px 3px #000;
 }
 
-.close-modal:hover { background: #00d9ff; }
+.close-modal:hover { background: $baby-blue; }
 
 // Card Behaviors
 
