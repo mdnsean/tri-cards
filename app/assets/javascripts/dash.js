@@ -58,6 +58,8 @@ var dashcode = (function() {
 
     var selectDeck = function(e) {
         if (e.target !== e.currentTarget) {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.add("hidden");
             var curDeck = document.getElementById("current-deck");
             if (curDeck.textContent === e.target.textContent) {
                 return; // do nothing if this deck already selected
@@ -66,6 +68,7 @@ var dashcode = (function() {
             var data = {
                 id: deckId
             };
+
             var onload = function(xhr) {
                 if (xhr.status === 200) {
                     var resp = (JSON.parse(xhr.responseText));
@@ -76,8 +79,10 @@ var dashcode = (function() {
                 }
             };
             makeAjaxRequest('GET', '/decks/' + deckId, data, onload);
+
         }
         e.stopPropagation();
+
     };
 
     var getAddCardForm = function(deck) {
@@ -177,24 +182,28 @@ var dashcode = (function() {
         // document.getElementById("deck-list").appendChild(newDiv);
     };
 
-    var attachSidebarTrigger = function() {
-        console.log("sidebar trigger added");
-        var el = document.getElementById("sidebar-trigger");
-        console.log(el.outerHTML);
-        el.addEventListener('click', sidebarToggle, false);
+    var attachSidebarTriggers = function() {
+        var button = document.getElementById("sidebar-trigger");
+        var sidebar = document.getElementById("sidebar");
+        button.addEventListener('click', sidebarToggle, false);
+        sidebar.addEventListener('mouseleave', sidebarOff, false);
     };
 
-    var sidebarToggle = function() {
+    var sidebarToggle = function(e) {
         var el = document.getElementById("sidebar");
-        el.classList.toggle("sidebar-on");
-        // el.classList.toggle("sidebar-off");
+        el.classList.toggle("hidden");
+    }
+    
+    var sidebarOff = function(e) {
+        var el = document.getElementById("sidebar");
+        el.classList.add("hidden");
     }
 
     var start = function() {
         attachNewDeckHandler();
         attachSelectDeckHandler();
         attachNewCardHandler();
-        attachSidebarTrigger();
+        attachSidebarTriggers();
     };
 
     return {

@@ -1,5 +1,12 @@
 @import "variables";
 
+// Deck Buttons
+.select-deck > button {
+    width: 100%;
+}
+
+// Sidebar Animation
+
 @keyframes sidebar-in {
     0% {opacity: 0;}
     100% {opacity: 0.8;}   
