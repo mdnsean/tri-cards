@@ -100,17 +100,19 @@ var dashcode = (function() {
     var showCards = function(deck, cards) {
         var curDeck = document.getElementById("current-deck");
         curDeck.textContent = deck.name;
-        var cardList = document.getElementById("card-list");
+        var cardList = document.getElementById("squares-container");
         cardList.innerHTML = "";
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
-            cardList.innerHTML += "<div id='build-card' class='select-card'>\
+            cardList.innerHTML += "<div class='square'>\
+<div class='card-cell'>\
+<div class='table'>\
+<div id='build-card' class='select-card table-cell'>\
 <button class='card-name'></button>\
 <div class='hidden-later'>\
 <div class='card-left'></div>\
 <div class='card-right'></div>\
-</div>\
-</div>";
+</div></div></div></div></div>";
             var buildCard = document.getElementById("build-card");
             var cName = buildCard.childNodes[0];
             var cHidden = buildCard.childNodes[1];
