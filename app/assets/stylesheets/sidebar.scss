@@ -1,0 +1,21 @@
+@import "variables";
+
+@keyframes sidebar-in {
+    0% {opacity: 0;}
+    100% {opacity: .75;}   
+}
+
+#sidebar {
+    position: fixed;
+    top: $header-height + $gen-margin;
+    left: 0;
+    bottom: 0;
+    width: $sidebar-width;
+
+    // new
+    opacity: 0;
+    z-index: 4;
+    overflow: auto;
+    animation: sidebar-in 200ms linear 0 1 **direction;
+    animation-fill-mode: forwards;
+}

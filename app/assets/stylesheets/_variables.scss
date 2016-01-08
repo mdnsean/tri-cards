@@ -16,6 +16,9 @@ $baby-blue: 00d9ff;
     background: -o-linear-gradient($top, $bottom);
 }
 
+// Sidebar Animation
+$off-left: -1 * $sidebar-width - $gen-margin;
+
 // Card Squares
 $sq-wd: 30%;
 $sq-ht: 30%;
