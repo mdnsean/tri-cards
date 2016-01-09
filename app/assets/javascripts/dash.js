@@ -145,6 +145,7 @@ var dashcode = (function() {
             leftCard.children[3].textContent = data[2].textContent;
             rightCard.children[0].textContent = data[3].textContent;
             rightCard.children[3].textContent = data[4].textContent;
+            location.href = "#tri-card-modal"
         }
         e.stopPropagation();
     };
