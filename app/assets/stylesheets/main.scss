@@ -18,14 +18,6 @@
     z-index: 2;
 }
 
-#main-content {
-    position: fixed;
-    top: $header-height + $gen-margin;
-    left: $sidebar-width + $gen-margin;
-    right: 0;
-    bottom: 0;
-}
-
 .hidden {
     visibility: hidden;
     display: none;
