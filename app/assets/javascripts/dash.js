@@ -1,5 +1,7 @@
 var dashcode = (function() {
 
+    // create and display decks
+
     var makeAjaxRequest = function(method, url, data, onload) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -84,6 +86,8 @@ var dashcode = (function() {
         e.stopPropagation();
 
     };
+
+    // create and display cards
 
     var getAddCardForm = function(deck) {
             var nameLabel = document.getElementById("deck-name-label");            
@@ -180,6 +184,8 @@ var dashcode = (function() {
         makeAjaxRequest('POST', '/cards', data, onload);
     };
 
+    // sidebar behaviors
+
     var attachSidebarTriggers = function() {
         var button = document.getElementById("sidebar-trigger");
         var sidebar = document.getElementById("sidebar");
@@ -197,6 +203,8 @@ var dashcode = (function() {
         el.classList.add("hidden");
     };
 
+    //  tri-card behaviors
+
     var attachToggleAnswers = function() {
         var parent = document.getElementById("tri-card-container");
         parent.addEventListener("click", toggleAnswers, false);
@@ -207,6 +215,8 @@ var dashcode = (function() {
             e.target.nextElementSibling.classList.toggle("hidden");
         }
     };
+
+    // execution
 
     var start = function() {
         attachNewDeckHandler();

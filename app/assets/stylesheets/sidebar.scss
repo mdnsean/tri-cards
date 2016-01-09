@@ -1,15 +1,7 @@
 @import "variables";
 
-// Deck Buttons
 .select-deck > button {
     width: 100%;
-}
-
-// Sidebar Animation
-
-@keyframes sidebar-in {
-    0% {opacity: 0;}
-    100% {opacity: 0.8;}   
 }
 
 #sidebar {
@@ -21,14 +13,4 @@
 
     // new
     z-index: 4;
-}
-
-.sidebar-off {
-    animation: sidebar-in 1s linear .01s 1 reverse;
-    animation-fill-mode: forwards;    
-}
-
-.sidebar-on {
-    animation: sidebar-in 1s linear .01s 1 normal;
-    animation-fill-mode: forwards;
 }
