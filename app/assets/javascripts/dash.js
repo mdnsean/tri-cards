@@ -190,18 +190,30 @@ var dashcode = (function() {
     var sidebarToggle = function(e) {
         var el = document.getElementById("sidebar");
         el.classList.toggle("hidden");
-    }
+    };
     
     var sidebarOff = function(e) {
         var el = document.getElementById("sidebar");
         el.classList.add("hidden");
-    }
+    };
+
+    var attachToggleAnswers = function() {
+        var parent = document.getElementById("tri-card-container");
+        parent.addEventListener("click", toggleAnswers, false);
+    };
+
+    var toggleAnswers = function(e) {
+        if (e.target.classList.contains("toggle-answer")) {
+            e.target.nextElementSibling.classList.toggle("hidden");
+        }
+    };
 
     var start = function() {
         attachNewDeckHandler();
         attachSelectDeckHandler();
         attachNewCardHandler();
         attachSidebarTriggers();
+        attachToggleAnswers();
     };
 
     return {
