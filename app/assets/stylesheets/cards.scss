@@ -4,6 +4,8 @@
 
 @import "variables";
 
+// Main Card Squares
+
 #squares-container {
     top: $header-height + $gen-margin;
     position: relative;
@@ -48,4 +50,13 @@
     width: 100%;
     height: 100%;
     background-color: lightgreen;
+}
+
+// Tri Cards View
+
+.modal-dialog #tri-card-container {
+    position: absolute;
+    width: 100%;
+    height: 33%;
+    top: 10%;
 }

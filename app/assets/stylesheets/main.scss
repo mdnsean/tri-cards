@@ -26,6 +26,11 @@
     bottom: 0;
 }
 
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
 // Modal Behaviors
 
 .modal-dialog {
@@ -49,7 +54,7 @@
     pointer-events: auto;
 }
 
-.modal-dialog > div {
+.modal-dialog #deck-modal {
     width: 400px;
     position: relative;
     margin: 10% auto;
@@ -78,10 +83,3 @@
 }
 
 .close-modal:hover { background: $baby-blue; }
-
-// Card Behaviors
-
-.hidden {
-    visibility: hidden;
-    display: none;
-}

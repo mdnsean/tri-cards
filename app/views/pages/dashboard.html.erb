@@ -1,5 +1,6 @@
 <div id="header" class="container">
   Welcome to Tricards
+  <%= render 'tri_card_modal' %>
   <div>
     <button id="sidebar-trigger">Select a Deck</button>
     <%= render 'add_card_modal' %>
@@ -11,4 +12,6 @@
   <%= render 'deck_list' %>
 </div>
 
-<%= render 'card_squares' %>
+<div id="squares-container">
+  <%= render 'card_squares' %>
+</div>
