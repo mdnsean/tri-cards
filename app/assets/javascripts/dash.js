@@ -105,27 +105,25 @@ var dashcode = (function() {
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             cardList.innerHTML += "<div class='square'>\
-<div class='card-cell'>\
-<div class='table'>\
-<div id='build-card' class='select-card table-cell'>\
-<button class='card-name'></button>\
-<div class='hidden-later'>\
-<div class='card-left'></div>\
-<div class='card-right'></div>\
-</div></div></div></div></div>";
+                <div class='card-cell'>\
+                <div class='table'>\
+                <div id='build-card' class='select-card table-cell'>\
+                <button class='card-name'></button>\
+                <div class='card-left-q hidden'></div>\
+                <div class='card-left-a hidden'></div>\
+                <div class='card-right-q hidden'></div>\
+                <div class='card-right-a hidden'></div>\
+                </div></div></div></div>";
+
             var buildCard = document.getElementById("build-card");
-            var cName = buildCard.childNodes[0];
-            var cHidden = buildCard.childNodes[1];
-            var cLeft = cHidden.childNodes[0];
-            var cRight = cHidden.childNodes[1];
-
+            buildCard.children[0].textContent = card.name;
+            buildCard.children[1].textContent = deck.left;
+            buildCard.children[2].textContent = card.left;
+            buildCard.children[3].textContent = deck.right;
+            buildCard.children[4].textContent = card.right;
+            
             buildCard.setAttribute("name", card.id);
-            cName.textContent = card.name;
-            cLeft.textContent = card.left;
-            cRight.textContent = card.right;
-
             buildCard.setAttribute("id", "");
-            cHidden.setAttribute("class", "hidden");
         }
         attachSelectCardHandler(cardList);
     };
@@ -136,8 +134,17 @@ var dashcode = (function() {
 
     var selectCard = function(e) {
         if (e.target !== e.currentTarget) {
-            var hiddens = e.target.nextSibling;
-            hiddens.classList.toggle("hidden");
+            var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
+            console.log(e.target.parentNode.outerHTML);
+            var midCard = document.getElementById("tri-card-mid");
+            var leftCard = document.getElementById("tri-card-left");
+            var rightCard = document.getElementById("tri-card-right");
+
+            midCard.children[0].textContent = data[0].textContent;
+            leftCard.children[0].textContent = data[1].textContent;
+            leftCard.children[3].textContent = data[2].textContent;
+            rightCard.children[0].textContent = data[3].textContent;
+            rightCard.children[3].textContent = data[4].textContent;
         }
         e.stopPropagation();
     };
