@@ -53,4 +53,19 @@
     height: 100%;
     background-color: rgba(0,0,0,0);
     border-color: rgba(0,0,0,0);
+    z-index: 4;
+}
+
+.edit-card-button {
+    position: absolute;
+    z-index: 6;
+    top: 60%;
+    left: 40%;
+}
+
+.delete-card-button {
+    position: absolute;
+    z-index: 6;
+    top: 70%;
+    left: 40%;
 }

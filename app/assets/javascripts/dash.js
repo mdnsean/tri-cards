@@ -189,10 +189,12 @@ var dashcode = (function() {
     // edit and delete cards
     var attachCardHoverHandler = function(cardList) {
         cardList.addEventListener('mouseover', cardHover, false);
+        cardList.addEventListener('mouseout', cardHover, false);
     };
 
     var cardHover = function(e) {
-        if (e.target !== e.currentTarget) {
+        if (e.target.classList.contains("card-name")) {
+        // if (e.target !== e.currentTarget) {
             console.log(e.target.parentNode.outerHTML);
             var edit = e.target.parentNode.children[5];
             var del = e.target.parentNode.children[6];
