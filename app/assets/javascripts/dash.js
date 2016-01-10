@@ -88,71 +88,6 @@ var dashcode = (function() {
     };
 
     // create and display cards
-
-    var getAddCardForm = function(deck) {
-            var nameLabel = document.getElementById("deck-name-label");            
-            var leftLabel = document.getElementById("deck-left-label");
-            var rightLabel = document.getElementById("deck-right-label");
-            var id = document.getElementById("deck-id-input");
-
-            nameLabel.textContent = deck.name + ": Add Card";
-            leftLabel.textContent = deck.left;
-            rightLabel.textContent = deck.right;
-            id.value = deck.id;
-    };
-
-    var showCards = function(deck, cards) {
-        var curDeck = document.getElementById("current-deck");
-        curDeck.textContent = deck.name;
-        var cardList = document.getElementById("squares-container");
-        cardList.innerHTML = "";
-        for (var i = 0; i < cards.length; i++) {
-            var card = cards[i];
-            cardList.innerHTML += "<div class='square'>\
-                <div class='card-cell'>\
-                <div class='table'>\
-                <div id='build-card' class='select-card table-cell'>\
-                <button class='card-name'></button>\
-                <div class='card-left-q hidden'></div>\
-                <div class='card-left-a hidden'></div>\
-                <div class='card-right-q hidden'></div>\
-                <div class='card-right-a hidden'></div>\
-                </div></div></div></div>";
-
-            var buildCard = document.getElementById("build-card");
-            buildCard.children[0].textContent = card.name;
-            buildCard.children[1].textContent = deck.left;
-            buildCard.children[2].textContent = card.left;
-            buildCard.children[3].textContent = deck.right;
-            buildCard.children[4].textContent = card.right;
-            
-            buildCard.setAttribute("name", card.id);
-            buildCard.setAttribute("id", "");
-        }
-        attachSelectCardHandler(cardList);
-    };
-
-    var attachSelectCardHandler = function(card) {
-        card.addEventListener('click', selectCard, false);
-    };
-
-    var selectCard = function(e) {
-        if (e.target !== e.currentTarget) {
-            var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
-            console.log(e.target.parentNode.outerHTML);
-            var midCard = document.getElementById("tri-card-mid");
-            var leftCard = document.getElementById("tri-card-left");
-            var rightCard = document.getElementById("tri-card-right");
-
-            midCard.children[0].textContent = data[0].textContent;
-            leftCard.children[0].textContent = data[1].textContent;
-            leftCard.children[3].textContent = data[2].textContent;
-            rightCard.children[0].textContent = data[3].textContent;
-            rightCard.children[3].textContent = data[4].textContent;
-            location.href = "#tri-card-modal"
-        }
-        e.stopPropagation();
-    };
     
     var attachNewCardHandler = function() {
         var el = document.getElementById("create-card-button");
@@ -182,6 +117,88 @@ var dashcode = (function() {
             }
         };
         makeAjaxRequest('POST', '/cards', data, onload);
+    };
+
+    var getAddCardForm = function(deck) {
+            var nameLabel = document.getElementById("deck-name-label");            
+            var leftLabel = document.getElementById("deck-left-label");
+            var rightLabel = document.getElementById("deck-right-label");
+            var id = document.getElementById("deck-id-input");
+
+            nameLabel.textContent = deck.name + ": Add Card";
+            leftLabel.textContent = deck.left;
+            rightLabel.textContent = deck.right;
+            id.value = deck.id;
+    };
+
+    var showCards = function(deck, cards) {
+        var curDeck = document.getElementById("current-deck");
+        curDeck.textContent = deck.name;
+        var cardList = document.getElementById("squares-container");
+        cardList.innerHTML = "";
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            cardList.innerHTML += "<div class='square'>\
+<div class='card-cell'>\
+<div class='table'>\
+<div id='build-card' class='select-card table-cell'>\
+<button class='card-name'></button>\
+<div class='card-left-q hidden'></div>\
+<div class='card-left-a hidden'></div>\
+<div class='card-right-q hidden'></div>\
+<div class='card-right-a hidden'></div>\
+<button class='edit-card-button hidden'>Edit</button>\
+<button class='delete-card-button hidden'>Delete</button>\
+</div></div></div></div>";
+
+            var buildCard = document.getElementById("build-card");
+            buildCard.children[0].textContent = card.name;
+            buildCard.children[1].textContent = deck.left;
+            buildCard.children[2].textContent = card.left;
+            buildCard.children[3].textContent = deck.right;
+            buildCard.children[4].textContent = card.right;
+            
+            buildCard.setAttribute("name", card.id);
+            buildCard.setAttribute("id", "");
+        }
+        attachSelectCardHandler(cardList);
+        attachCardHoverHandler(cardList);
+    };
+
+    var attachSelectCardHandler = function(cardList) {
+        cardList.addEventListener('click', selectCard, false);
+    };
+
+    var selectCard = function(e) {
+        if (e.target !== e.currentTarget) {
+            var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
+            var midCard = document.getElementById("tri-card-mid");
+            var leftCard = document.getElementById("tri-card-left");
+            var rightCard = document.getElementById("tri-card-right");
+
+            midCard.children[0].textContent = data[0].textContent;
+            leftCard.children[0].textContent = data[1].textContent;
+            leftCard.children[3].textContent = data[2].textContent;
+            rightCard.children[0].textContent = data[3].textContent;
+            rightCard.children[3].textContent = data[4].textContent;
+            location.href = "#tri-card-modal";
+        }
+        e.stopPropagation();
+    };
+
+    // edit and delete cards
+    var attachCardHoverHandler = function(cardList) {
+        cardList.addEventListener('mouseover', cardHover, false);
+    };
+
+    var cardHover = function(e) {
+        if (e.target !== e.currentTarget) {
+            console.log(e.target.parentNode.outerHTML);
+            var edit = e.target.parentNode.children[5];
+            var del = e.target.parentNode.children[6];
+            edit.classList.toggle("hidden");
+            del.classList.toggle("hidden"); 
+        }
     };
 
     // sidebar behaviors
