@@ -51,6 +51,7 @@ var dashcode = (function() {
         newButton.appendChild(deckName);
         newDiv.appendChild(newButton);
         document.getElementById("deck-list").appendChild(newDiv);
+        newButton.click();
     };
     
     var attachSelectDeckHandler = function() {
@@ -86,6 +87,17 @@ var dashcode = (function() {
     };
 
     // create and display cards
+
+    var refreshCards = function() {
+        var curDeck = document.getElementById("current-deck");
+        var deckList = document.getElementById("deck-list").children;
+        for (var j = 0; j < deckList.length; j++) {
+            if (deckList[j].children[0].textContent == curDeck.textContent) {
+                deckList[j].children[0].click();
+                break;
+            }
+        }
+    };
     
     var attachNewCardHandler = function() {
         var el = document.getElementById("create-card-button");
@@ -110,17 +122,7 @@ var dashcode = (function() {
             if (xhr.status === 200) {
                 // var card = xhr.responseText;
                 // displayNewCard(JSON.parse(card));
-                var curDeck = document.getElementById("current-deck");
-                var deckList = document.getElementById("deck-list").children;
-                for (var j = 0; j < deckList.length; j++) {
-                    if (deckList[j].children[0].textContent == curDeck.textContent) {
-                        deckList[j].children[0].click();
-                        break;
-                    }
-                }
-//                 id="deck-list">
-// <div class="select-deck">
-// <button name="1">d1</button>
+                refreshCards();
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
@@ -171,19 +173,25 @@ var dashcode = (function() {
             buildCard.setAttribute("name", card.id);
             buildCard.setAttribute("id", "");
         }
-        attachSelectOrSlashCardHandler(cardList);
-        attachCardHoverHandler(cardList);
+        attachAllCardHandlers(cardList);
     };
 
-    var attachSelectOrSlashCardHandler = function(cardList) {
-        cardList.addEventListener('click', selectOrSlashCard, false);
+    // card behaviors: select, slash, edit, delete
+
+    var attachAllCardHandlers = function(cardList) {
+        cardList.addEventListener('click', clickCard, false);
+        cardList.addEventListener('mouseover', cardHoverOn, false);
+        cardList.addEventListener('mouseout', cardHoverOff, false);
+
         var triCards = document.getElementById("tri-card-container");
         triCards.addEventListener('click', slashTriCard, false);
     };
 
-    var selectOrSlashCard = function(e) {
+    var clickCard = function(e) {
         var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
         var id = e.target.parentNode.getAttribute("name");
+
+        // select (open tri-card)
         if (e.target.classList.contains("card-name")) {
             var midCard = document.getElementById("tri-card-mid");
             var leftCard = document.getElementById("tri-card-left");
@@ -197,9 +205,14 @@ var dashcode = (function() {
             rightCard.children[0].textContent = data[3].textContent;
             rightCard.children[3].textContent = data[4].textContent;
             location.href = "#tri-card-modal";
+
         } else if (e.target.classList.contains("slash-button")) {
             console.log("slash card ID = " + id);
-            sendSlashRequest(id);
+            slashCard(id);
+        } else if (e.target.classList.contains("edit-card-button")) {
+            editCard(id);
+        } else if (e.target.classList.contains("delete-card-button")) {
+            deleteCard(id);     
         }
         e.stopPropagation();
     };
@@ -219,7 +232,7 @@ var dashcode = (function() {
         e.stopPropagation();
     };
 
-    var sendSlashRequest = function(id) {
+    var slashCard = function(id) {
         var data = {
             id: id
         };
@@ -231,32 +244,40 @@ var dashcode = (function() {
                 console.log("Status code: " + xhr.statusText);
             }
         };
-        makeAjaxRequest('POST', 'cards/' + id + '/slash', data, onload);
+        makeAjaxRequest('POST', '/cards/' + id + '/slash', data, onload);
+    };
+    
+    var deleteCard = function(id) {
+        var data = {
+            id: id
+        };
+        var onload = function(xhr) {
+            if (xhr.status === 200) {
+                var delId = JSON.parse(xhr.responseText);
+                console.log("successfully deleted card id = " + delId);
+                refreshCards();
+            } else {
+                console.log("Status code: " + xhr.statusText);
+            }
+        };
+        makeAjaxRequest('DELETE', '/cards/' + id, data, onload);
     };
 
-    // var makeAjaxRequest = function(method, url, data, onload) {
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.onload = function() {
-    //         onload(xhr);
-    //     };
-    //     xhr.open(method, url, true);
-    //     xhr.setRequestHeader('Content-Type', 'application/json');
-    //     xhr.setRequestHeader('Data-Type', 'json');
-    //     xhr.send(JSON.stringify(data));
-    // };
-
-    // edit, delete
-    var attachCardHoverHandler = function(cardList) {
-        cardList.addEventListener('mouseover', cardHover, false);
-        cardList.addEventListener('mouseout', cardHover, false);
-    };
-
-    var cardHover = function(e) {
+    var cardHoverOn = function(e) {
         if (e.target.classList.contains("card-name")) {
             var edit = e.target.parentNode.children[5];
             var del = e.target.parentNode.children[6];
-            edit.classList.toggle("hidden");
-            del.classList.toggle("hidden"); 
+            edit.classList.remove("hidden");
+            del.classList.remove("hidden"); 
+        }
+    };
+
+    var cardHoverOff = function(e) {
+        if (e.target.classList.contains("card-name")) {
+            var edit = e.target.parentNode.children[5];
+            var del = e.target.parentNode.children[6];
+            edit.classList.add("hidden");
+            del.classList.add("hidden"); 
         }
     };
 
