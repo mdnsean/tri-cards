@@ -1,10 +1,7 @@
 <div id="header" class="container">
-  Welcome to Tricards
+  <%= render 'current_deck_header' %>
+  <%= render 'add_card_modal' %>
   <%= render 'tri_card_modal' %>
-  <div>
-    <button id="sidebar-trigger">Select a Deck</button>
-    <%= render 'add_card_modal' %>
-  </div>
 </div>
 
 <div id="sidebar" class="hidden container">

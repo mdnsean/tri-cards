@@ -56,6 +56,18 @@ var dashcode = (function() {
     var attachSelectDeckHandler = function() {
         var parent = document.getElementById("deck-list");
         parent.addEventListener('click', selectDeck, false);
+        parent.addEventListener('mouseover', deckHover, false);
+        parent.addEventListener('mouseout', deckHover, false);
+    };
+
+    var deckHover = function(e) {
+        console.log(e.target.className);
+        if (e.target !== e.currentTarget) {
+            var edit = e.target.nextElementSibling;
+            var del = edit.nextEdlementSibling;
+            edit.classList.toggle("hidden");
+            del.classList.toggle("hidden"); 
+        }
     };
 
     var selectDeck = function(e) {
@@ -84,7 +96,6 @@ var dashcode = (function() {
 
         }
         e.stopPropagation();
-
     };
 
     // create and display cards
@@ -194,8 +205,6 @@ var dashcode = (function() {
 
     var cardHover = function(e) {
         if (e.target.classList.contains("card-name")) {
-        // if (e.target !== e.currentTarget) {
-            console.log(e.target.parentNode.outerHTML);
             var edit = e.target.parentNode.children[5];
             var del = e.target.parentNode.children[6];
             edit.classList.toggle("hidden");
@@ -241,6 +250,7 @@ var dashcode = (function() {
         attachNewDeckHandler();
         attachSelectDeckHandler();
         attachNewCardHandler();
+
         attachSidebarTriggers();
         attachToggleAnswers();
     };
