@@ -56,18 +56,8 @@ var dashcode = (function() {
     var attachSelectDeckHandler = function() {
         var parent = document.getElementById("deck-list");
         parent.addEventListener('click', selectDeck, false);
-        parent.addEventListener('mouseover', deckHover, false);
-        parent.addEventListener('mouseout', deckHover, false);
-    };
-
-    var deckHover = function(e) {
-        console.log(e.target.className);
-        if (e.target !== e.currentTarget) {
-            var edit = e.target.nextElementSibling;
-            var del = edit.nextEdlementSibling;
-            edit.classList.toggle("hidden");
-            del.classList.toggle("hidden"); 
-        }
+        // parent.addEventListener('mouseover', deckHover, false);
+        // parent.addEventListener('mouseout', deckHover, false);
     };
 
     var selectDeck = function(e) {
@@ -152,7 +142,7 @@ var dashcode = (function() {
             cardList.innerHTML += "<div class='square'>\
 <div class='card-cell'>\
 <div class='table'>\
-<div id='build-card' class='select-card table-cell'>\
+<div id='build-card' class='select-card table-cell' name=''>\
 <button class='card-name'></button>\
 <div class='card-left-q hidden'></div>\
 <div class='card-left-a hidden'></div>\
@@ -160,6 +150,7 @@ var dashcode = (function() {
 <div class='card-right-a hidden'></div>\
 <button class='edit-card-button hidden'>Edit</button>\
 <button class='delete-card-button hidden'>Delete</button>\
+<button class='slash-button'>Slash</button>\
 </div></div></div></div>";
 
             var buildCard = document.getElementById("build-card");
@@ -172,32 +163,52 @@ var dashcode = (function() {
             buildCard.setAttribute("name", card.id);
             buildCard.setAttribute("id", "");
         }
-        attachSelectCardHandler(cardList);
+        attachSelectOrSlashCardHandler(cardList);
         attachCardHoverHandler(cardList);
     };
 
-    var attachSelectCardHandler = function(cardList) {
-        cardList.addEventListener('click', selectCard, false);
+    var attachSelectOrSlashCardHandler = function(cardList) {
+        cardList.addEventListener('click', selectOrSlashCard, false);
+        var triCards = document.getElementById("tri-card-container");
+        triCards.addEventListener('click', slashTriCard, false);
     };
 
-    var selectCard = function(e) {
-        if (e.target !== e.currentTarget) {
-            var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
+    var selectOrSlashCard = function(e) {
+        var data = e.target.parentNode.children; //name,LQ,LA,RQ,RA
+        var id = e.target.parentNode.getAttribute("name");
+        if (e.target.classList.contains("card-name")) {
             var midCard = document.getElementById("tri-card-mid");
             var leftCard = document.getElementById("tri-card-left");
             var rightCard = document.getElementById("tri-card-right");
 
+            // customize, then open tri-card-modal
+            midCard.setAttribute("name", id);
             midCard.children[0].textContent = data[0].textContent;
             leftCard.children[0].textContent = data[1].textContent;
             leftCard.children[3].textContent = data[2].textContent;
             rightCard.children[0].textContent = data[3].textContent;
             rightCard.children[3].textContent = data[4].textContent;
             location.href = "#tri-card-modal";
+        } else if (e.target.classList.contains("slash-button")) {
+            console.log("slash card ID = " + id);
         }
         e.stopPropagation();
     };
 
-    // edit and delete cards
+    var slashTriCard = function(e) {
+        var id = e.target.parentNode.getAttribute("name");
+        var cardList = document.getElementsByClassName("select-card");
+        for (var i = 0; i < cardList.length; i++) {
+            if (cardList[i].getAttribute("name") == id) {
+                cardList[i].children[7].click();
+                document.getElementById("close-tri-modal").click();
+                break;
+            }
+        }
+
+    };
+
+    // edit, delete
     var attachCardHoverHandler = function(cardList) {
         cardList.addEventListener('mouseover', cardHover, false);
         cardList.addEventListener('mouseout', cardHover, false);

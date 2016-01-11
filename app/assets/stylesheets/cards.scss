@@ -59,13 +59,20 @@
 .edit-card-button {
     position: absolute;
     z-index: 6;
-    top: 60%;
-    left: 40%;
+    top: 10%;
+    right: 5%;
 }
 
 .delete-card-button {
     position: absolute;
     z-index: 6;
-    top: 70%;
+    top: 20%;
+    right: 5%;
+}
+
+.slash-button {
+    position: absolute;
+    z-index: 6;
+    top: 60%;
     left: 40%;
 }
