@@ -65,9 +65,6 @@ var dashcode = (function() {
             var sidebar = document.getElementById("sidebar");
             var curDeck = document.getElementById("current-deck");
             sidebar.classList.add("hidden");
-            if (curDeck.textContent === e.target.textContent) {
-                return; // do nothing if this deck already selected
-            }
             var deckId = e.target.name;
             var data = {
                 id: deckId
@@ -111,8 +108,19 @@ var dashcode = (function() {
 
         var onload = function(xhr) {
             if (xhr.status === 200) {
-                var card = xhr.responseText;
-                displayNewCard(JSON.parse(card));
+                // var card = xhr.responseText;
+                // displayNewCard(JSON.parse(card));
+                var curDeck = document.getElementById("current-deck");
+                var deckList = document.getElementById("deck-list").children;
+                for (var j = 0; j < deckList.length; j++) {
+                    if (deckList[j].children[0].textContent == curDeck.textContent) {
+                        deckList[j].children[0].click();
+                        break;
+                    }
+                }
+//                 id="deck-list">
+// <div class="select-deck">
+// <button name="1">d1</button>
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
@@ -197,15 +205,18 @@ var dashcode = (function() {
     };
 
     var slashTriCard = function(e) {
-        var id = e.target.parentNode.getAttribute("name");
-        var cardList = document.getElementsByClassName("select-card");
-        for (var i = 0; i < cardList.length; i++) {
-            if (cardList[i].getAttribute("name") == id) {
-                cardList[i].children[7].click();
-                document.getElementById("close-tri-modal").click();
-                break;
+        if (e.target.classList.contains("slash-button")) {
+            var id = e.target.parentNode.getAttribute("name");
+            var cardList = document.getElementsByClassName("select-card");
+            for (var i = 0; i < cardList.length; i++) {
+                if (cardList[i].getAttribute("name") == id) {
+                    cardList[i].children[7].click();
+                    document.getElementById("close-tri-modal").click();
+                    break;
+                }
             }
         }
+        e.stopPropagation();
     };
 
     var sendSlashRequest = function(id) {
