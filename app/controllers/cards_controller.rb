@@ -8,6 +8,16 @@ class CardsController < ApplicationController
         end
     end
 
+    def slash
+        @card = Card.find(params[:id])
+        if @card
+            @card.slash
+            render json: @card.slashed
+        else
+            return
+        end
+    end
+
     private
         def card_params
             params.require(:card).permit(:name, :left, :right, :deck_id)

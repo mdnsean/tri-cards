@@ -191,6 +191,7 @@ var dashcode = (function() {
             location.href = "#tri-card-modal";
         } else if (e.target.classList.contains("slash-button")) {
             console.log("slash card ID = " + id);
+            sendSlashRequest(id);
         }
         e.stopPropagation();
     };
@@ -212,9 +213,14 @@ var dashcode = (function() {
             id: id
         };
         var onload = function(xhr) {
-
+            if (xhr.status === 200) {
+                console.log(JSON.parse(xhr.responseText));
+                // slash card animation
+            } else {
+                console.log("Status code: " + xhr.statusText);
+            }
         };
-        makeAjaxRequest('POST', 'controller#slash?', data, onload);
+        makeAjaxRequest('POST', 'cards/' + id + '/slash', data, onload);
     };
 
     // var makeAjaxRequest = function(method, url, data, onload) {

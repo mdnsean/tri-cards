@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'pages#dashboard'
   resources :decks
   resources :cards
+  post 'cards/:id/slash' => 'cards#slash'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
