@@ -205,8 +205,28 @@ var dashcode = (function() {
                 break;
             }
         }
-
     };
+
+    var sendSlashRequest = function(id) {
+        var data = {
+            id: id
+        };
+        var onload = function(xhr) {
+
+        };
+        makeAjaxRequest('POST', 'controller#slash?', data, onload);
+    };
+
+    // var makeAjaxRequest = function(method, url, data, onload) {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.onload = function() {
+    //         onload(xhr);
+    //     };
+    //     xhr.open(method, url, true);
+    //     xhr.setRequestHeader('Content-Type', 'application/json');
+    //     xhr.setRequestHeader('Data-Type', 'json');
+    //     xhr.send(JSON.stringify(data));
+    // };
 
     // edit, delete
     var attachCardHoverHandler = function(cardList) {
