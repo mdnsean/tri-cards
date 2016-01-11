@@ -338,9 +338,29 @@ var dashcode = (function() {
         }
     };
 
+    // splash screen
+
+    var attachSplashScreenHandlers = function() {
+        // on hover title, on click title
+        var title = document.getElementById("splash-title");
+        title.addEventListener('click', slashFront, false);
+    };
+
+    var slashFront = function() {
+        //bg= black-whiteout, Slash= red-whiteout
+        // remove splash screen
+        var bg = document.getElementById("splash-bg");
+        var slash = document.getElementById("slash-line");
+        bg.style.backgroundColor = "black";
+        slash.classList.toggle("hidden");
+        console.log("Title clicked: slashing front");
+    };
+
     // execution
 
     var start = function() {
+        attachSplashScreenHandlers();
+
         attachNewDeckHandler();
         attachSelectDeckHandler();
         attachNewCardHandler();
