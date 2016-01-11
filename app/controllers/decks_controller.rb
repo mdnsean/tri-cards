@@ -13,6 +13,17 @@ class DecksController < ApplicationController
         @cards = @deck.cards
         render json: {deck: @deck, cards: @cards}
     end
+
+    def destroy
+        @id = params[:id]
+        @deck = Deck.find(params[:id])
+        if @deck
+            @deck.destroy
+            render json: @id
+        else
+            return
+        end
+    end
     
     private
         def deck_params

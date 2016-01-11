@@ -57,8 +57,6 @@ var dashcode = (function() {
     var attachSelectDeckHandler = function() {
         var parent = document.getElementById("deck-list");
         parent.addEventListener('click', selectDeck, false);
-        // parent.addEventListener('mouseover', deckHover, false);
-        // parent.addEventListener('mouseout', deckHover, false);
     };
 
     var selectDeck = function(e) {
@@ -66,11 +64,13 @@ var dashcode = (function() {
             var sidebar = document.getElementById("sidebar");
             var curDeck = document.getElementById("current-deck");
             sidebar.classList.add("hidden");
+            curDeck.textContent = e.target.textContent;
+            attachEditDeleteDeckHandlers(e.target.getAttribute("name"));
+            
             var deckId = e.target.name;
             var data = {
                 id: deckId
             };
-
             var onload = function(xhr) {
                 if (xhr.status === 200) {
                     var resp = (JSON.parse(xhr.responseText));
@@ -84,6 +84,33 @@ var dashcode = (function() {
 
         }
         e.stopPropagation();
+    };
+
+    // edit and delete decks
+
+    var attachEditDeleteDeckHandlers = function(id) {
+        var edit = document.getElementById("edit-deck-button");
+        var del = document.getElementById("delete-deck-button");
+        // edit...
+        del.addEventListener("click", function() {
+            deleteDeck(id);
+        }, false);
+    };
+
+    var deleteDeck = function(id) {
+        var data = {
+            id: id
+        };
+        var onload = function(xhr) {
+            if (xhr.status === 200) {
+                var delId = JSON.parse(xhr.responseText);
+                console.log("successfully deleted deck id = " + delId);
+                window.location.href = "/";
+            } else {
+                console.log(xhr.statusText);
+            }
+        };
+        makeAjaxRequest('DELETE', '/decks/' + id, data, onload);
     };
 
     // create and display cards
@@ -143,8 +170,6 @@ var dashcode = (function() {
     };
 
     var showCards = function(deck, cards) {
-        var curDeck = document.getElementById("current-deck");
-        curDeck.textContent = deck.name;
         var cardList = document.getElementById("squares-container");
         cardList.innerHTML = "";
         for (var i = 0; i < cards.length; i++) {
