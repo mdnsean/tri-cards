@@ -55,10 +55,6 @@
     left: 0;
     background: rgba(0,0,0,0.5);
     z-index: 100;
-    opacity: 1;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
     pointer-events: none;
 }
 
@@ -73,4 +69,15 @@
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     transform: translateX(5%) translateY(45%) rotate(-35deg);
+    opacity: 0;
+}
+
+.slash-in {
+    transition: opacity 1s linear 0.25s;
+    opacity: 1;
+}
+
+.splash-out {
+    transition: opacity 0.25s linear 0.25s;
+    opacity: 0;
 }

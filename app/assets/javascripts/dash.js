@@ -353,6 +353,9 @@ var dashcode = (function() {
         var slash = document.getElementById("slash-container");
         bg.style.backgroundColor = "black";
         slash.classList.toggle("hidden");
+        slash.children[0].classList.toggle("slash-in");
+        console.log(slash.children[0].outerHTML);
+        bg.classList.toggle("splash-out");
         console.log("Title clicked: slashing front");
     };
 
