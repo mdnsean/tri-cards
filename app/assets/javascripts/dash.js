@@ -350,7 +350,7 @@ var dashcode = (function() {
         //bg= black-whiteout, Slash= red-whiteout
         // remove splash screen
         var bg = document.getElementById("splash-bg");
-        var slash = document.getElementById("slash-line");
+        var slash = document.getElementById("slash-container");
         bg.style.backgroundColor = "black";
         slash.classList.toggle("hidden");
         console.log("Title clicked: slashing front");

@@ -1,22 +1,22 @@
 <div id="splash-bg" class="fade-in">
   <h1 id="splash-title" class="fade-in">SLASHCARDS</h1>
-  <div id="slash-line" class="hidden"></div>
+<div id="slash-container" class="hidden">
+  <div id="slash-line"></div>
 </div>
 
-<div class="wrapper">
-<!-- old code vvv -->
-  <div id="header" class="container">
-    <%= render 'current_deck_header' %>
-    <%= render 'add_card_modal' %>
-    <%= render 'tri_card_modal' %>
-  </div>
+</div>
 
-  <div id="sidebar" class="hidden container">
-    <%= render 'new_deck_modal' %>
-    <%= render 'deck_list' %>
-  </div>
+<div id="header" class="container">
+  <%= render 'current_deck_header' %>
+  <%= render 'add_card_modal' %>
+  <%= render 'tri_card_modal' %>
+</div>
 
-  <div id="squares-container">
-    <%= render 'card_squares' %>
-  </div>
+<div id="sidebar" class="hidden container">
+  <%= render 'new_deck_modal' %>
+  <%= render 'deck_list' %>
+</div>
+
+<div id="squares-container">
+  <%= render 'card_squares' %>
 </div>
