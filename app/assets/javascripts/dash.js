@@ -234,8 +234,6 @@ var dashcode = (function() {
         } else if (e.target.classList.contains("slash-button")) {
             console.log("slash card ID = " + id);
             slashCard(id);
-        } else if (e.target.classList.contains("edit-card-button")) {
-            editCard(id);
         } else if (e.target.classList.contains("delete-card-button")) {
             deleteCard(id);     
         }
@@ -292,7 +290,7 @@ var dashcode = (function() {
         if (e.target.classList.contains("card-name")) {
             var edit = e.target.parentNode.children[5];
             var del = e.target.parentNode.children[6];
-            edit.classList.remove("hidden");
+            // edit.classList.remove("hidden");
             del.classList.remove("hidden"); 
         }
     };
