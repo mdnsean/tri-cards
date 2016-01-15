@@ -63,6 +63,8 @@ var dashcode = (function() {
         if (e.target !== e.currentTarget) {
             var sidebar = document.getElementById("sidebar");
             var curDeck = document.getElementById("current-deck");
+            var addCardLink = document.getElementById("add-card-link");
+            addCardLink.classList.remove("hidden");
             sidebar.classList.add("hidden");
             curDeck.textContent = e.target.textContent;
             attachEditDeleteDeckHandlers(e.target.getAttribute("name"));
@@ -89,15 +91,20 @@ var dashcode = (function() {
     // edit and delete decks
 
     var attachEditDeleteDeckHandlers = function(id) {
-        var edit = document.getElementById("edit-deck-button");
+        console.log("deck id delete handler added: " + id);
         var del = document.getElementById("delete-deck-button");
-        // edit...
-        del.addEventListener("click", function() {
+        del.classList.remove("hidden");
+        if (typeof deleteDeckId !== "undefined") {
+            del.removeEventListener("click", deleteDeckId, false);
+        }
+        deleteDeckId = function() {
             deleteDeck(id);
-        }, false);
+        };
+        del.addEventListener("click", deleteDeckId, false);
     };
 
     var deleteDeck = function(id) {
+        console.log("delete deck actually called on deck: " + id);
         var data = {
             id: id
         };
@@ -307,7 +314,7 @@ var dashcode = (function() {
     // sidebar behaviors
 
     var attachSidebarTriggers = function() {
-        var button = document.getElementById("sidebar-trigger");
+        var button = document.getElementById("current-deck");
         var sidebar = document.getElementById("sidebar");
         button.addEventListener('click', sidebarToggle, false);
         sidebar.addEventListener('mouseleave', sidebarOff, false);
