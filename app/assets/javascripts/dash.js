@@ -204,6 +204,12 @@ var dashcode = (function() {
             
             buildCard.setAttribute("name", card.id);
             buildCard.setAttribute("id", "");
+            console.log(card);
+            if (card.slashed === true) {
+                var cardCell = buildCard.parentNode.parentNode;
+                console.log("card cell: " + cardCell.outerHTML);
+                cardCell.style.backgroundColor = "#CC0000";
+            }
         }
         attachAllCardHandlers(cardList);
     };
@@ -268,9 +274,19 @@ var dashcode = (function() {
         };
         var onload = function(xhr) {
             if (xhr.status === 200) {
-                console.log(xhr.responseText);
-                if (xhr.responseText == "true") {
-                    console.log("isSlashed = true");
+                // console.log(xhr.responseText);
+                var cardsList = document.getElementsByClassName("card-cell");
+                for (var i = 0; i < cardsList.length; i++) {
+                    var card = cardsList[i].children[0].children[0];
+                    // console.log(card.outerHTML + "card found ^^");
+                    if (card.getAttribute("name") == id) {
+                        if (xhr.responseText == "true") {
+                            console.log("isSlashed = true");
+                            cardsList[i].style.backgroundColor = "#CC0000";
+                        } else {
+                            cardsList[i].style.backgroundColor = "lightgreen";    
+                        }
+                    }
                 }
             } else {
                 console.log("Status code: " + xhr.statusText);
