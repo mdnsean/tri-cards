@@ -268,8 +268,10 @@ var dashcode = (function() {
         };
         var onload = function(xhr) {
             if (xhr.status === 200) {
-                console.log(JSON.parse(xhr.responseText));
-                // slash card animation
+                console.log(xhr.responseText);
+                if (xhr.responseText == "true") {
+                    console.log("isSlashed = true");
+                }
             } else {
                 console.log("Status code: " + xhr.statusText);
             }
@@ -352,16 +354,15 @@ var dashcode = (function() {
     };
 
     var slashFront = function() {
-        //bg= black-whiteout, Slash= red-whiteout
-        // remove splash screen
         var bg = document.getElementById("splash-bg");
         var slash = document.getElementById("slash-container");
         bg.style.backgroundColor = "black";
-        slash.classList.toggle("hidden");
-        // slash.classList.toggle("slash-in");
-        bg.classList.toggle("splash-out");
+        slash.classList.remove("hidden");
+        bg.classList.add("splash-out");
         setTimeout(function() {
             bg.classList.add("hidden");
+            bg.classList.remove("splash-out");
+            slash.classList.add("hidden");
         }, 1000);
     };
 
