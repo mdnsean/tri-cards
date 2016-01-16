@@ -20,10 +20,9 @@
     overflow: hidden;
     width: $sq-wd;
     padding-bottom: $sq-ht;
-    margin: 1.66%;
+    margin: calc(1.66% - 5px);
     background-color: black;
     border-radius: .15 * $sq-wd;
-    border: 10px solid #CC0000;
 }
 
 .card-cell {

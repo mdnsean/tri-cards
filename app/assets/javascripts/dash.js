@@ -91,7 +91,6 @@ var dashcode = (function() {
     // edit and delete decks
 
     var attachEditDeleteDeckHandlers = function(id) {
-        console.log("deck id delete handler added: " + id);
         var del = document.getElementById("delete-deck-button");
         del.classList.remove("hidden");
         if (typeof deleteDeckId !== "undefined") {
@@ -205,10 +204,12 @@ var dashcode = (function() {
             buildCard.setAttribute("name", card.id);
             buildCard.setAttribute("id", "");
             console.log(card);
+
+            var square = buildCard.parentNode.parentNode.parentNode;
             if (card.slashed === true) {
-                var cardCell = buildCard.parentNode.parentNode;
-                console.log("card cell: " + cardCell.outerHTML);
-                cardCell.style.backgroundColor = "#CC0000";
+                square.style.border = "5px solid #CC0000";
+            } else {
+                square.style.border = "5px solid rgba(255,255,255,1)";
             }
         }
         attachAllCardHandlers(cardList);
@@ -275,16 +276,17 @@ var dashcode = (function() {
         var onload = function(xhr) {
             if (xhr.status === 200) {
                 // console.log(xhr.responseText);
-                var cardsList = document.getElementsByClassName("card-cell");
+                var cardsList = document.getElementsByClassName("square");
                 for (var i = 0; i < cardsList.length; i++) {
-                    var card = cardsList[i].children[0].children[0];
+                    var card = cardsList[i].children[0].children[0].children[0];
                     // console.log(card.outerHTML + "card found ^^");
                     if (card.getAttribute("name") == id) {
                         if (xhr.responseText == "true") {
                             console.log("isSlashed = true");
-                            cardsList[i].style.backgroundColor = "#CC0000";
+                            cardsList[i].style.border = "5px solid #CC0000";
+
                         } else {
-                            cardsList[i].style.backgroundColor = "lightgreen";    
+                            cardsList[i].style.border = "5px solid rgba(255,255,255,1)";  
                         }
                     }
                 }
