@@ -1,7 +1,6 @@
 // Panel sizing
-$header-height: 100px;
-$sidebar-width: 100px;
-$gen-margin: 30px;
+$header-height: 20%;
+$sidebar-width: 10%;
 
 // Colors
 $white: #fff;
@@ -15,9 +14,6 @@ $baby-blue: 00d9ff;
     background: -webkit-linear-gradient($top, $bottom);
     background: -o-linear-gradient($top, $bottom);
 }
-
-// Sidebar Animation
-$off-left: -1 * $sidebar-width - $gen-margin;
 
 // Card Squares
 $sq-wd: 30%;

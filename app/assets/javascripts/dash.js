@@ -209,7 +209,7 @@ var dashcode = (function() {
             if (card.slashed === true) {
                 square.style.border = "5px solid #CC0000";
             } else {
-                square.style.border = "5px solid rgba(255,255,255,1)";
+                square.style.border = "5px solid lightgray";
             }
         }
         attachAllCardHandlers(cardList);
@@ -286,7 +286,7 @@ var dashcode = (function() {
                             cardsList[i].style.border = "5px solid #CC0000";
 
                         } else {
-                            cardsList[i].style.border = "5px solid rgba(255,255,255,1)";  
+                            cardsList[i].style.border = "5px solid lightgray";  
                         }
                     }
                 }
