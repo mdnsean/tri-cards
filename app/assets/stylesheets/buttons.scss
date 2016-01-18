@@ -1,11 +1,26 @@
 button {
+    display: inline-block;
+    margin: 0 .15em 0 0;
+    padding: .25em .6em;
+    appearance: none;
+    box-shadow: 0 .4em darkgreen;
+    border: none;
+    border-radius: .4em;
     font-size: .5em;
+    font-family: 'Lora', serif;
+    background-color: lighten(lightgray, 10%);
 }
 
-btn-hover {
-    
+button:focus {
+    outline: none;
 }
 
-btn-press {
-    
+button:hover {
+    background-color: lightgray;
+}
+
+button:active {
+    background-color: darken(lightgray, 10%);
+    box-shadow: 0 .2em darkgreen;
+    transform: translateY(.2em);
 }
