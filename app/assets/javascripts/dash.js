@@ -184,7 +184,7 @@ var dashcode = (function() {
 <div class='card-cell'>\
 <div class='table'>\
 <div id='build-card' class='select-card table-cell' name=''>\
-<button class='card-name'></button>\
+<button class='card-name green-button'></button>\
 <div class='card-left-q hidden'></div>\
 <div class='card-left-a hidden'></div>\
 <div class='card-right-q hidden'></div>\
